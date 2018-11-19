@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+$card-color: #F7FBFFEE;
+$text-color: #333;
+
 body,app-root,html{
 	height:100%;
 	width: 100%;
@@ -7,11 +10,13 @@ body,app-root,html{
 
 }
 app-root{
+	font-size: 1em;
+	min-width: 1024px;
 	display: flex-column;
 	justify-content: flex-start;
 	align-items: flex-start;
 	flex-wrap: wrap;
-	color:333;
+	color:$text-color;
 	background: linear-gradient(#FFF,#EEE);
 	background-repeat: no-repeat;
 	background-attachment: fixed;	
@@ -39,6 +44,7 @@ i{
 .navigation{
 	z-index: 1000;
 	width: 100%;
+	min-width: 1024px;
 	height: 64px;
 	padding-bottom: 2%;
 	position: fixed;
@@ -69,7 +75,7 @@ i{
 	flex-wrap: wrap;
 	justify-content: space-around;
 	align-items: center;
-	background: #EEE;
+	background: $card-color;
 	margin-top: 5%;
 	width: 100%;
 	font-family: 'Open Sans', sans-serif;
@@ -117,13 +123,14 @@ i{
 }
 .project{
 	border-radius: 5px;
-	background: #EEE;
+	background: $card-color;
 	font-size: 1em;
 /*	border: solid 1px #222;*/
 	margin-right: 5px;
 	border-top: none;
 	border-right: none;
 	width: 45%;
+	min-width: 400px;
 	padding: 2%;
 	margin-bottom: 10px;
 	display: flex;
@@ -152,7 +159,7 @@ i{
 	margin-right: 5px;
 }
 .project .image{
-	min-height: 300px;
+	max-height: 300px;
 	width: 100%;
 	overflow: hidden;
 }
@@ -161,8 +168,9 @@ i{
 	padding-bottom: 5px;
 }
 .project .image img{
-	height: 300px;
-	width: auto;
+	max-width: 100%;
+	height: auto;
+	max-height: 300px;
 }
 .project .buttons{
 	margin-left: auto;
