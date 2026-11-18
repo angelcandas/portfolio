@@ -1,37 +1,30 @@
 # Publicar sobrinotech.com en Cloudflare Pages
 
-El sitio es estático (Astro). Cada push a `master` pasa las pruebas en GitHub Actions y, si todo va bien,
-se publica en Cloudflare Pages. Cada pull request se publica también en una URL de vista previa.
+El sitio es estático (Astro) y se publica con la integración de Git de Cloudflare Pages: Cloudflare
+lee el repositorio y construye cada push. No hace falta ningún token ni secreto en GitHub.
 
 ```
-push / PR ─▶ GitHub Actions: build · astro check · pruebas (axe, desbordes, consola) ─▶ wrangler pages deploy
-                                                                                      ├─ master → sobrinotech.com
-                                                                                      └─ rama → <rama>.sobrinotech.pages.dev
+push a master ─▶ Cloudflare Pages (proyecto "portfolio"): npm run build ─▶ dist/ ─▶ sobrinotech.com
+push a otra rama / PR ─▶ vista previa en <rama>.portfolio-hqc.pages.dev
+push / PR ─▶ GitHub Actions (quality.yml): build · astro check · pruebas (axe, desbordes, consola, capturas)
 ```
 
-## Configuración (una sola vez, desde tu ordenador)
+## Configuración actual en Cloudflare
 
-Necesitas Node 22, la CLI de GitHub (`gh auth login`) y el navegador.
-
-```bash
-git clone https://github.com/angelcandas/portfolio.git sobrinotech && cd sobrinotech
-bash tools/setup-cloudflare.sh
-```
-
-El script:
-
-1. Inicia sesión en Cloudflare con `wrangler login`.
-2. Crea el proyecto de Pages `sobrinotech` con `master` como rama de producción.
-3. Te pide un token de API (Create Custom Token → **Account · Cloudflare Pages · Edit**).
-4. Guarda `CLOUDFLARE_API_TOKEN` y `CLOUDFLARE_ACCOUNT_ID` como secretos del repositorio.
-5. Añade `sobrinotech.com` y `www.sobrinotech.com` como dominios del proyecto.
-
-Si el paso 5 no se puede hacer por API, hazlo a mano (son dos clics, el DNS ya está en Cloudflare):
-**Workers & Pages → sobrinotech → Custom domains → Set up a custom domain →** `sobrinotech.com` y luego
-`www.sobrinotech.com`. Cloudflare crea los registros CNAME solo. Si en la zona ya hay registros A/AAAA/CNAME
-para `@` o `www` (por ejemplo de un aparcamiento de dominio), bórralos antes.
+- **Workers & Pages → portfolio**, conectado a `angelcandas/portfolio`.
+- Rama de producción `master`, preset Astro, comando `npm run build`, salida `dist`.
+- Dominios: `sobrinotech.com` y `www.sobrinotech.com` (Custom domains del proyecto).
+- URL de Pages: https://portfolio-hqc.pages.dev/
 
 Para que `www` redirija a la raíz: **sobrinotech.com (zona) → Rules → Redirect Rules → Redirect from WWW to root**.
+
+Las pruebas de GitHub Actions no bloquean el despliegue de Cloudflare. Mira que el check esté en verde antes
+de fusionar un PR a `master`.
+
+## Correo
+
+`hello@sobrinotech.com` (inglés) y `hola@sobrinotech.com` (español) están en `site.email` de
+`src/i18n/content.ts`. Ambos se reenvían con **Email Routing** de la zona a la bandeja de trabajo.
 
 ## Día a día
 
@@ -42,5 +35,4 @@ npm run build      # astro check + build en dist/
 npm test           # pruebas sobre dist/ (necesita `npx playwright install chromium` la primera vez)
 ```
 
-Todo el texto, enlaces y proyectos están en `src/i18n/content.ts` (español e inglés).
-Los correos de contacto (`hello@` en inglés, `hola@` en español) están en `site.email` en ese archivo. Ambos deben existir en Email Routing de Cloudflare.
+Todo el texto, enlaces y proyectos están en `src/i18n/content.ts` (inglés y español).
