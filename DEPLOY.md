@@ -43,4 +43,4 @@ npm test           # pruebas sobre dist/ (necesita `npx playwright install chrom
 ```
 
 Todo el texto, enlaces y proyectos están en `src/i18n/content.ts` (español e inglés).
-Para mostrar un correo de contacto, rellena `site.email` en ese archivo.
+Los correos de contacto (`hello@` en inglés, `hola@` en español) están en `site.email` en ese archivo. Ambos deben existir en Email Routing de Cloudflare.

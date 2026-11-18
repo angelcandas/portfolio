@@ -1,7 +1,7 @@
 # sobrinotech.com
 
 Portfolio de Angel Candas. Astro, CSS a mano y unas 200 líneas de TypeScript para el movimiento
-(osciloscopio en canvas, revelado al hacer scroll, botones magnéticos). Bilingüe: `/` en español y `/en/` en inglés.
+(osciloscopio en canvas, revelado al hacer scroll, botones magnéticos). Bilingüe: `/` en inglés (público internacional) y `/es/` en español.
 
 - Contenido: `src/i18n/content.ts`
 - Componentes: `src/components/`

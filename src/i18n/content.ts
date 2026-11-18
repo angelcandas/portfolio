@@ -10,8 +10,8 @@ export const site = {
   url: 'https://sobrinotech.com',
   github: 'https://github.com/angelcandas',
   linkedin: 'https://www.linkedin.com/in/angelcandas/',
-  // Leave empty to hide the email button. Example: 'hola@sobrinotech.com'
-  email: '',
+  // Contact address per language (both forward to the same inbox). Leave empty to hide the button.
+  email: { en: 'hello@sobrinotech.com', es: 'hola@sobrinotech.com' } as Record<'en' | 'es', string>,
   location: 'Valencia, España',
   timezone: 'Europe/Madrid',
 };
@@ -66,7 +66,7 @@ const es = {
     description:
       'Portfolio de Ángel Candás Sobrino: ingeniero frontend y de producto con más de 10 años en React y TypeScript, líder técnico y autor de MicFX, ¿Qué como? y otros proyectos.',
   },
-  nav: { work: 'Trabajo', about: 'Perfil', contact: 'Contacto', switch: 'EN', switchHref: '/en/', switchLabel: 'Read in English' },
+  nav: { work: 'Trabajo', about: 'Perfil', contact: 'Contacto', switch: 'EN', switchHref: '/', switchLabel: 'Read in English' },
   skip: 'Saltar al contenido',
   hero: {
     kicker: 'Frontend & Product Engineer · Tech Lead',
@@ -176,7 +176,7 @@ const en: Copy = {
     description:
       'Portfolio of Ángel Candás Sobrino: frontend and product engineer with 10+ years in React and TypeScript, tech lead, and maker of MicFX, ¿Qué como? and more.',
   },
-  nav: { work: 'Work', about: 'About', contact: 'Contact', switch: 'ES', switchHref: '/', switchLabel: 'Leer en español' },
+  nav: { work: 'Work', about: 'About', contact: 'Contact', switch: 'ES', switchHref: '/es/', switchLabel: 'Leer en español' },
   skip: 'Skip to content',
   hero: {
     kicker: 'Frontend & Product Engineer · Tech Lead',

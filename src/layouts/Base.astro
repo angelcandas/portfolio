@@ -30,8 +30,8 @@ const jsonLd = {
     <title>{pageTitle}</title>
     <meta name="description" content={pageDesc} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" hreflang="es" href={new URL('/', site.url).href} />
-    <link rel="alternate" hreflang="en" href={new URL('/en/', site.url).href} />
+    <link rel="alternate" hreflang="en" href={new URL('/', site.url).href} />
+    <link rel="alternate" hreflang="es" href={new URL('/es/', site.url).href} />
     <link rel="alternate" hreflang="x-default" href={new URL('/', site.url).href} />
     {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#09090b" />
