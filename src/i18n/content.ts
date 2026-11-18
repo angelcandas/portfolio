@@ -4,14 +4,15 @@
 export type Lang = 'es' | 'en';
 
 export const site = {
-  name: 'Angel Candas',
+  name: 'Ángel Candás',
+  fullName: 'Ángel Candás Sobrino',
   domain: 'sobrinotech.com',
   url: 'https://sobrinotech.com',
   github: 'https://github.com/angelcandas',
   linkedin: 'https://www.linkedin.com/in/angelcandas/',
   // Leave empty to hide the email button. Example: 'hola@sobrinotech.com'
   email: '',
-  location: 'Asturias, España',
+  location: 'Valencia, España',
   timezone: 'Europe/Madrid',
 };
 
@@ -61,22 +62,22 @@ const archive = [
 const es = {
   lang: 'es' as Lang,
   meta: {
-    title: 'Angel Candas · Ingeniero y desarrollador',
+    title: 'Ángel Candás · Frontend & Product Engineer',
     description:
-      'Portfolio de Angel Candas: ingeniero de telecomunicaciones que construye software de audio en tiempo real, PWAs y productos web de principio a fin.',
+      'Portfolio de Ángel Candás Sobrino: ingeniero frontend y de producto con más de 10 años en React y TypeScript, líder técnico y autor de MicFX, ¿Qué como? y otros proyectos.',
   },
   nav: { work: 'Trabajo', about: 'Perfil', contact: 'Contacto', switch: 'EN', switchHref: '/en/', switchLabel: 'Read in English' },
   skip: 'Saltar al contenido',
   hero: {
-    kicker: 'Ingeniero de telecomunicaciones · Desarrollador',
+    kicker: 'Frontend & Product Engineer · Tech Lead',
     lines: ['Construyo software', 'que *suena*, se instala', 'y se usa a diario.'],
     intro:
-      'Del procesado de señal en C++ a apps web que funcionan sin conexión. Diseño, programo y pongo en producción productos completos.',
+      'Más de 10 años construyendo aplicaciones web con React y TypeScript, los últimos siete liderando equipos. Fuera del trabajo, del procesado de señal en C++ a PWAs que usamos en casa cada día.',
     cta: 'Ver proyectos',
     status: 'Abierto a nuevos proyectos',
     scroll: 'Desliza',
   },
-  marquee: ['Audio en tiempo real', 'C++ / JUCE', 'PWAs', 'React', 'TypeScript', 'Firebase', 'Cloudflare', 'IoT', 'DSP', 'Pruebas end-to-end'],
+  marquee: ['React', 'TypeScript', 'Next.js', 'Liderazgo técnico', 'WCAG 2.1 AA', 'Playwright', 'Audio en tiempo real', 'C++ / JUCE', 'PWAs', 'Claude Code'],
   work: {
     label: 'Trabajo seleccionado',
     title: 'Proyectos',
@@ -132,23 +133,28 @@ const es = {
   about: {
     label: 'Perfil',
     title: 'Ingeniería primero. Producto siempre.',
+    facts: [
+      { value: 10, suffix: '+', label: 'años con React y TypeScript' },
+      { value: 7, suffix: '', label: 'años liderando equipos' },
+      { value: 50, suffix: '+', label: 'squads en la plataforma de micro-frontends de Inditex' },
+      { value: 83, suffix: '', label: 'Lighthouse del nuevo dashboard bancario (antes 53)' },
+    ],
     body: [
-      'Soy ingeniero de telecomunicaciones y mecatrónica. Empecé diseñando placas, redes y firmware para sistemas IoT, y hoy construyo software de principio a fin: el motor de audio, la interfaz, las pruebas y el despliegue.',
-      'Me gustan los productos que la gente usa de verdad. Casi todo lo que hay en esta página lo usamos en casa cada día.',
+      'Soy ingeniero de telecomunicaciones (Universidad de Oviedo) con un máster en mecatrónica (UPV). Hoy lidero el equipo frontend que reconstruye el portal de clientes empresa de un banco de compensación británico: pagos, aprobaciones y usuarios, con PSD2, WCAG 2.1 AA y una versión nueva cada semana.',
+      'Me gusta hacerme cargo de un área de producto de principio a fin: arquitectura, pruebas y lo que hace la gente después de cada versión. Uso Claude Code y Copilot como parte de cómo entrega mi equipo, y casi todo lo que hay en esta página lo usamos en casa cada día.',
     ],
     capsLabel: 'Lo que hago',
     caps: [
+      { title: 'Frontend', items: ['React · Next.js (SSR) · TypeScript', 'Micro-frontends · Vue 3', 'Material-UI · Tailwind', 'Accesibilidad WCAG 2.1 AA'] },
+      { title: 'Liderazgo y entrega', items: ['Equipos de 5 ingenieros senior', 'Arquitectura y plan de entrega', 'Feature flags y versiones semanales', 'Mentoría y herramientas de IA'] },
+      { title: 'Calidad y backend', items: ['Playwright · Cypress · Jest', 'Node · BFF · REST · GraphQL', 'PostgreSQL · MongoDB', 'GitHub Actions · Azure · AWS'] },
       { title: 'Audio y tiempo real', items: ['C++20 · JUCE', 'DSP: pitch, FFT, filtros', 'Plugins AU / VST3', 'MIDI y automatización'] },
-      { title: 'Producto web', items: ['PWAs que funcionan sin conexión', 'React · TypeScript · Vite', 'JavaScript sin dependencias', 'Diseño de interfaz'] },
-      { title: 'Backend y nube', items: ['Firebase · Firestore · Auth', 'Cloudflare Workers y Pages', 'Node · Django · Docker', 'CI/CD con GitHub Actions'] },
-      { title: 'Hardware e IoT', items: ['Diseño de PCB', 'Electrónica embebida', 'Wi-Fi, Zigbee, RFID, MQTT', 'Backend en Java'] },
     ],
     expLabel: 'Experiencia',
     exp: [
-      { org: 'Otus Robotic Engineering', role: 'Ingeniero y desarrollador', text: 'Sistema IoT para una terminal portuaria en un equipo de tres: diseño del sistema, PCB, red Wi-Fi, firmware embebido y backend en Java.' },
-      { org: 'Skiconnect', role: 'I+D en RFID', text: 'Investigación de tecnologías RFID y diseño de una aplicación para localizar clientes dentro de una estación.' },
-      { org: 'ArcelorMittal', role: 'Ingeniero electrónico en prácticas', text: 'Comparativa de módulos Zigbee de bajo consumo para comunicaciones industriales.' },
-      { org: 'HRK Studios', role: 'Producción audiovisual', text: 'Cortometraje producido por HRK Studios, participante en el Festival Internacional de Cine de Gijón.' },
+      { org: 'Wizeline', period: '2022 — hoy', role: 'Senior Frontend Engineer · Tech Lead', text: 'Lidero 5 ingenieros senior en la reconstrucción del portal de clientes empresa de un banco de compensación británico (React, Next.js, Material-UI). Flujos de pago y aprobación con PSD2 y WCAG 2.1 AA, pruebas end-to-end desde cero y versiones semanales con feature flags. Antes, módulos para Inditex, Dow Jones y CloudPay.' },
+      { org: 'Gilytics', period: '2019 — 2022', role: 'Lead Frontend Engineer', text: 'Startup respaldada por la ESA que diseña trazados de líneas eléctricas. Lideré 5 ingenieros en la plataforma WebGIS: planificar una línea pasó de semanas a días.' },
+      { org: 'Cartonatura · Otus Robotic Engineering', period: '2014 — 2018', role: 'Full-Stack Developer · I+D', text: 'WebGIS de agricultura de precisión en Angular y Django, y sistemas de control telemático IoT en React y Java.' },
     ],
   },
   contact: {
@@ -157,7 +163,7 @@ const es = {
     body: 'Escríbeme y lo hablamos.',
     email: 'Escribir un correo',
   },
-  footer: { built: 'Diseñado y construido por Angel Candas', local: 'Hora local', top: 'Volver arriba' },
+  footer: { built: 'Diseñado y construido por Ángel Candás', local: 'Hora local', top: 'Volver arriba' },
   notFound: { title: 'Señal perdida', body: 'Esta página no existe.', back: 'Volver al inicio' },
 };
 
@@ -166,22 +172,22 @@ type Copy = typeof es;
 const en: Copy = {
   lang: 'en',
   meta: {
-    title: 'Angel Candas · Engineer & developer',
+    title: 'Ángel Candás · Frontend & Product Engineer',
     description:
-      'Portfolio of Angel Candas: telecommunications engineer building real-time audio software, offline-first PWAs and web products end to end.',
+      'Portfolio of Ángel Candás Sobrino: frontend and product engineer with 10+ years in React and TypeScript, tech lead, and maker of MicFX, ¿Qué como? and more.',
   },
   nav: { work: 'Work', about: 'About', contact: 'Contact', switch: 'ES', switchHref: '/', switchLabel: 'Leer en español' },
   skip: 'Skip to content',
   hero: {
-    kicker: 'Telecommunications engineer · Developer',
+    kicker: 'Frontend & Product Engineer · Tech Lead',
     lines: ['I build software', 'that *sounds* good, installs', 'and gets used daily.'],
     intro:
-      'From signal processing in C++ to web apps that work offline. I design, code and ship complete products.',
+      '10+ years building web applications with React and TypeScript, the last seven leading teams. After hours, anything from C++ signal processing to PWAs we use at home every day.',
     cta: 'See projects',
     status: 'Open to new projects',
     scroll: 'Scroll',
   },
-  marquee: ['Real-time audio', 'C++ / JUCE', 'PWAs', 'React', 'TypeScript', 'Firebase', 'Cloudflare', 'IoT', 'DSP', 'End-to-end tests'],
+  marquee: ['React', 'TypeScript', 'Next.js', 'Technical leadership', 'WCAG 2.1 AA', 'Playwright', 'Real-time audio', 'C++ / JUCE', 'PWAs', 'Claude Code'],
   work: {
     label: 'Selected work',
     title: 'Projects',
@@ -237,23 +243,28 @@ const en: Copy = {
   about: {
     label: 'About',
     title: 'Engineering first. Product always.',
+    facts: [
+      { value: 10, suffix: '+', label: 'years with React and TypeScript' },
+      { value: 7, suffix: '', label: 'years leading teams' },
+      { value: 50, suffix: '+', label: 'squads on Inditex’s micro-frontend platform' },
+      { value: 83, suffix: '', label: 'Lighthouse on the new banking dashboard (was 53)' },
+    ],
     body: [
-      'I’m a telecommunications and mechatronics engineer. I started out designing boards, networks and firmware for IoT systems, and today I build software end to end: the audio engine, the interface, the tests and the deployment.',
-      'I like products people actually use. Almost everything on this page is used at home every day.',
+      'I’m a telecommunications engineer (University of Oviedo) with a master’s in mechatronics (UPV). Today I lead the frontend team rebuilding a UK clearing bank’s business customer portal: payments, approvals and user management, under PSD2 and WCAG 2.1 AA, released every week.',
+      'I like owning a product area end to end: architecture, testing and what users actually do after a release. I use Claude Code and Copilot as part of how my team ships, and almost everything on this page is used at home every day.',
     ],
     capsLabel: 'What I do',
     caps: [
+      { title: 'Frontend', items: ['React · Next.js (SSR) · TypeScript', 'Micro-frontends · Vue 3', 'Material-UI · Tailwind', 'WCAG 2.1 AA accessibility'] },
+      { title: 'Leadership & delivery', items: ['Teams of 5 senior engineers', 'Architecture & delivery plans', 'Feature flags, weekly releases', 'Mentoring & AI tooling'] },
+      { title: 'Quality & backend', items: ['Playwright · Cypress · Jest', 'Node · BFF · REST · GraphQL', 'PostgreSQL · MongoDB', 'GitHub Actions · Azure · AWS'] },
       { title: 'Audio & real time', items: ['C++20 · JUCE', 'DSP: pitch, FFT, filters', 'AU / VST3 plugins', 'MIDI & automation'] },
-      { title: 'Web product', items: ['Offline-first PWAs', 'React · TypeScript · Vite', 'Dependency-free JavaScript', 'Interface design'] },
-      { title: 'Backend & cloud', items: ['Firebase · Firestore · Auth', 'Cloudflare Workers & Pages', 'Node · Django · Docker', 'CI/CD with GitHub Actions'] },
-      { title: 'Hardware & IoT', items: ['PCB design', 'Embedded electronics', 'Wi-Fi, Zigbee, RFID, MQTT', 'Java backends'] },
     ],
     expLabel: 'Experience',
     exp: [
-      { org: 'Otus Robotic Engineering', role: 'Engineer & developer', text: 'IoT system for a port terminal in a team of three: system design, PCB, Wi-Fi network, embedded firmware and Java backend.' },
-      { org: 'Skiconnect', role: 'RFID R&D', text: 'Researched RFID technologies and designed an app to locate customers inside a ski resort.' },
-      { org: 'ArcelorMittal', role: 'Electronics engineering intern', text: 'Benchmarked low-power Zigbee modules for industrial communications.' },
-      { org: 'HRK Studios', role: 'Film production', text: 'Short film produced by HRK Studios, screened at the Gijón International Film Festival.' },
+      { org: 'Wizeline', period: '2022 — now', role: 'Senior Frontend Engineer · Tech Lead', text: 'Leading 5 senior engineers rebuilding a UK clearing bank’s business customer portal (React, Next.js, Material-UI). Payment and approval flows under PSD2 and WCAG 2.1 AA, end-to-end testing from scratch and weekly releases behind feature flags. Before that, modules for Inditex, Dow Jones and CloudPay.' },
+      { org: 'Gilytics', period: '2019 — 2022', role: 'Lead Frontend Engineer', text: 'ESA-backed startup building route planning for power grid operators. Led 5 engineers on the WebGIS platform: planning a powerline went from weeks to days.' },
+      { org: 'Cartonatura · Otus Robotic Engineering', period: '2014 — 2018', role: 'Full-Stack Developer · R&D', text: 'Precision-agriculture WebGIS in Angular and Django, and IoT telematic control systems in React and Java.' },
     ],
   },
   contact: {
@@ -262,7 +273,7 @@ const en: Copy = {
     body: 'Drop me a line and let’s talk.',
     email: 'Send an email',
   },
-  footer: { built: 'Designed and built by Angel Candas', local: 'Local time', top: 'Back to top' },
+  footer: { built: 'Designed and built by Ángel Candás', local: 'Local time', top: 'Back to top' },
   notFound: { title: 'Signal lost', body: 'This page doesn’t exist.', back: 'Back home' },
 };
 

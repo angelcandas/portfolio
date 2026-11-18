@@ -12,9 +12,13 @@ const og = new URL('/og.png', site.url).href;
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: site.name,
+  name: site.fullName,
+  alternateName: site.name,
   url: site.url,
-  jobTitle: lang === 'es' ? 'Ingeniero de telecomunicaciones y desarrollador' : 'Telecommunications engineer and developer',
+  jobTitle: 'Frontend & Product Engineer',
+  address: { '@type': 'PostalAddress', addressLocality: 'Valencia', addressCountry: 'ES' },
+  alumniOf: ['Universitat Politècnica de València', 'Universidad de Oviedo'],
+  knowsLanguage: ['es', 'en', 'it'],
   sameAs: [site.github, site.linkedin],
 };
 ---
