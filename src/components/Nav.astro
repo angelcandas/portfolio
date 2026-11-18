@@ -1,0 +1,59 @@
+---
+import { copy, type Lang } from '../i18n/content';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = copy[lang];
+const home = lang === 'es' ? '/' : '/en/';
+---
+<header class="nav" data-nav>
+  <div class="nav__inner wrap">
+    <a href={home} class="nav__logo" aria-label="sobrinotech · Ángel Candás">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M2 16h5l3-9 5 18 4-14 3 5h8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>sobrino<b>tech</b></span>
+    </a>
+    <nav aria-label={lang === 'es' ? 'Principal' : 'Main'}>
+      <ul role="list" class="nav__links">
+        <li><a href="#work" data-hover>{t.nav.work}</a></li>
+        <li><a href="#about" data-hover>{t.nav.about}</a></li>
+        <li><a href="#contact" data-hover>{t.nav.contact}</a></li>
+        <li><a href={t.nav.switchHref} class="nav__lang" hreflang={lang === 'es' ? 'en' : 'es'} lang={lang === 'es' ? 'en' : 'es'}>{t.nav.switch}<span class="sr-only"> · {t.nav.switchLabel}</span></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: fixed; inset: 0 0 auto; z-index: 50;
+    padding-block: 16px;
+    transition: transform 0.6s var(--ease-out);
+  }
+  .nav.is-hidden { transform: translateY(-110%); }
+  .nav::before {
+    content: ''; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(to bottom, rgb(9 9 11 / 0.85), rgb(9 9 11 / 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    mask-image: linear-gradient(to bottom, #000 55%, transparent);
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .nav.is-scrolled::before { opacity: 1; }
+  .nav__inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .nav__logo { display: inline-flex; align-items: center; gap: 10px; font-family: var(--f-display); font-size: 19px; font-weight: 500; letter-spacing: -0.03em; min-height: 44px; }
+  .nav__logo b { font-weight: 700; color: var(--accent); }
+  .nav__logo svg { width: 28px; height: 28px; color: var(--accent); }
+  .nav__links { display: flex; align-items: center; gap: clamp(4px, 2vw, 28px); font-size: 14px; font-weight: 500; }
+  .nav__links a { display: inline-flex; align-items: center; min-height: 44px; padding-inline: 6px; position: relative; color: var(--fg-2); transition: color 0.3s; }
+  .nav__links a:hover { color: var(--fg); }
+  .nav__links a[data-hover]::after {
+    content: ''; position: absolute; left: 6px; right: 6px; bottom: 10px; height: 1px; background: currentColor;
+    transform: scaleX(0); transform-origin: right; transition: transform 0.5s var(--ease-out);
+  }
+  .nav__links a[data-hover]:hover::after { transform: scaleX(1); transform-origin: left; }
+  .nav__lang { font-family: var(--f-mono); font-size: 12px; border: 1px solid var(--line-2); border-radius: 999px; padding-inline: 14px !important; min-width: 44px; justify-content: center; }
+  .nav__lang:hover { border-color: var(--accent); color: var(--accent) !important; }
+  @media (max-width: 560px) {
+    .nav__links li:nth-child(2) { display: none; }
+    .nav__logo span { display: none; }
+  }
+</style>
