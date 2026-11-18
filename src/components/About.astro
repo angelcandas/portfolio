@@ -33,16 +33,6 @@ const t = copy[Astro.props.lang].about;
       ))}
     </ul>
 
-    <h3 class="sub label">{t.expLabel}</h3>
-    <ol role="list" class="exp">
-      {t.exp.map((e, i) => (
-        <li data-reveal style={`--d:${i}`}>
-          <div><h4>{e.org}</h4><p class="period">{e.period}</p></div>
-          <p class="role">{e.role}</p>
-          <p class="txt">{e.text}</p>
-        </li>
-      ))}
-    </ol>
   </div>
 </section>
 
@@ -61,9 +51,8 @@ const t = copy[Astro.props.lang].about;
   .fact dd span { color: var(--fg); }
   .fact:nth-child(1) dd, .fact:nth-child(4) dd { color: var(--accent); }
   .fact dt { color: var(--muted); font-size: 14px; max-width: 26ch; }
-  .period { font-family: var(--f-mono); font-size: 12px; color: var(--muted); margin-top: 8px; }
   .sub { margin-bottom: 24px; }
-  .caps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); margin-bottom: clamp(72px, 10vw, 140px); }
+  .caps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); }
   .cap { padding: 28px 24px 32px 0; border-right: 1px solid var(--line); display: grid; gap: 14px; align-content: start; position: relative; }
   .cap + .cap { padding-left: 24px; }
   .cap:last-child { border-right: 0; }
@@ -73,11 +62,6 @@ const t = copy[Astro.props.lang].about;
   .cap h4 { font-size: clamp(22px, 2vw, 30px); font-weight: 500; letter-spacing: -0.03em; }
   .cap ul { display: grid; gap: 6px; color: var(--fg-2); font-size: 14.5px; }
 
-  .exp { border-top: 1px solid var(--line); }
-  .exp li { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 3fr) minmax(0, 5fr); gap: 8px 32px; padding: 28px 0; border-bottom: 1px solid var(--line); align-items: baseline; }
-  .exp h4 { font-size: clamp(22px, 2.2vw, 34px); font-weight: 500; letter-spacing: -0.035em; }
-  .role { font-family: var(--f-mono); font-size: 12.5px; color: var(--accent); }
-  .txt { color: var(--fg-2); font-size: 15px; }
 
   @media (max-width: 1024px) {
     .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -89,8 +73,7 @@ const t = copy[Astro.props.lang].about;
   }
   @media (max-width: 760px) {
     .about__intro { grid-template-columns: 1fr; }
-    .exp li { grid-template-columns: 1fr; }
-  }
+    }
   @media (max-width: 520px) {
     .caps { grid-template-columns: 1fr; }
     .cap, .cap + .cap { padding-left: 0; border-right: 0; }
