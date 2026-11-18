@@ -15,6 +15,7 @@ const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 
     <ul role="list" class="contact__links" data-reveal>
       <li><a class="big" href={site.linkedin} target="_blank" rel="me noopener" data-magnetic><span>LinkedIn</span><Fragment set:html={arrow} /></a></li>
       <li><a class="big" href={site.github} target="_blank" rel="me noopener" data-magnetic><span>GitHub</span><Fragment set:html={arrow} /></a></li>
+      <li><a class="big" href={site.cv} download data-magnetic><span>{t.cv}</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v9M4 7.5 8 11.5l4-4M3 14h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
       {site.email[lang] && <li><a class="big" href={`mailto:${site.email[lang]}`} data-magnetic><span>{site.email[lang]}</span><Fragment set:html={arrow} /></a></li>}
     </ul>
   </div>

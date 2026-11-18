@@ -13,6 +13,7 @@ const home = lang === 'es' ? '/es/' : '/';
     </a>
     <nav aria-label={lang === 'es' ? 'Principal' : 'Main'}>
       <ul role="list" class="nav__links">
+        <li><a href="#experience" data-hover>{t.nav.experience}</a></li>
         <li><a href="#work" data-hover>{t.nav.work}</a></li>
         <li><a href="#about" data-hover>{t.nav.about}</a></li>
         <li><a href="#contact" data-hover>{t.nav.contact}</a></li>
@@ -53,7 +54,7 @@ const home = lang === 'es' ? '/es/' : '/';
   .nav__lang { font-family: var(--f-mono); font-size: 12px; border: 1px solid var(--line-2); border-radius: 999px; padding-inline: 14px !important; min-width: 44px; justify-content: center; }
   .nav__lang:hover { border-color: var(--accent); color: var(--accent) !important; }
   @media (max-width: 560px) {
-    .nav__links li:nth-child(2) { display: none; }
+    .nav__links li:nth-child(2), .nav__links li:nth-child(3) { display: none; }
     .nav__logo span { display: none; }
   }
 </style>

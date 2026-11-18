@@ -2,17 +2,19 @@
 import { copy, site, type Lang } from '../i18n/content';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
-const t = copy[lang].hero;
+const all = copy[lang];
+const t = all.hero;
+const longest = Math.max(...t.lines.map((l) => l.replace(/\*/g, '').length));
 const fmt = (s: string) => s.replace(/\*(.+?)\*/g, '<em>$1</em>');
 ---
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero__inner wrap">
     <div class="hero__top">
       <p class="label hero__fade" style="--i:0">{t.kicker}</p>
-      <p class="hero__status hero__fade" style="--i:1"><span class="dot" aria-hidden="true"></span>{t.status}</p>
+      <p class="hero__status hero__fade" style="--i:1"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s-4.5-4.2-4.5-7.6a4.5 4.5 0 0 1 9 0c0 3.4-4.5 7.6-4.5 7.6z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="6.9" r="1.6" fill="currentColor"/></svg>{t.location}</p>
     </div>
 
-    <h1 id="hero-title" class="hero__title">
+    <h1 id="hero-title" class="hero__title" style={`--chars:${longest}`}>
       <span class="sr-only">{site.name}. </span>
       {t.lines.map((line, i) => (
         <span class="line"><span class="line__in" style={`--i:${i}`} set:html={fmt(line)} /></span>
@@ -24,12 +26,13 @@ const fmt = (s: string) => s.replace(/\*(.+?)\*/g, '<em>$1</em>');
     <div class="hero__bottom">
       <p class="hero__intro hero__fade" style="--i:4">{t.intro}</p>
       <div class="hero__actions hero__fade" style="--i:5">
-        <a href="#work" class="btn btn--solid" data-magnetic>
-          {t.cta}
-          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M3 9l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <a href={site.cv} class="btn btn--solid" download data-magnetic>
+          {all.cv}
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v9M4 7.5 8 11.5l4-4M3 14h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <a href={site.github} class="btn" data-magnetic rel="me noopener" target="_blank">GitHub<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#experience" class="btn" data-magnetic>{t.experience}<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M3 9l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <a href={site.linkedin} class="btn" data-magnetic rel="me noopener" target="_blank">LinkedIn<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href={site.github} class="btn" data-magnetic rel="me noopener" target="_blank">GitHub<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </div>
 
@@ -58,9 +61,9 @@ const fmt = (s: string) => s.replace(/\*(.+?)\*/g, '<em>$1</em>');
       radial-gradient(50% 40% at 10% 90%, rgb(200 255 61 / 0.08), transparent 70%);
   }
   .hero__scope {
-    position: absolute; z-index: -1;
-    left: 0; right: 0; top: 34%;
-    width: 100%; height: 46%;
+    position: relative; z-index: -1; display: block; max-width: none;
+    width: calc(100% + 2 * var(--gutter)); height: clamp(110px, 17vh, 190px);
+    margin: -24px calc(-1 * var(--gutter));
   }
   .hero__inner { display: flex; flex-direction: column; justify-content: space-between; gap: 40px; }
   .hero__top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
@@ -70,12 +73,11 @@ const fmt = (s: string) => s.replace(/\*(.+?)\*/g, '<em>$1</em>');
     border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px 6px 10px;
     background: rgb(255 255 255 / 0.03);
   }
-  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); position: relative; }
-  .dot::after { content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 1px solid var(--accent); animation: ping 2s var(--ease-out) infinite; }
-  @keyframes ping { from { transform: scale(0.6); opacity: 1; } to { transform: scale(2.2); opacity: 0; } }
+  .hero__status svg { width: 15px; height: 15px; color: var(--accent); flex: none; }
 
   .hero__title {
-    font-size: clamp(42px, 8.6vw, 148px);
+    /* Fit the longest line on one row: about 0.44em per character, plus the 0.9em indent. */
+    font-size: min(120px, 7vw, calc((100vw - 2 * var(--gutter)) / (var(--chars) * 0.44 + 0.9)));
     font-weight: 500;
     line-height: 0.94;
     letter-spacing: -0.055em;
@@ -102,7 +104,7 @@ const fmt = (s: string) => s.replace(/\*(.+?)\*/g, '<em>$1</em>');
   @keyframes fade { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 
   .hero__bottom { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 32px; align-items: end; }
-  .hero__intro { max-width: 34ch; font-size: clamp(17px, 1.3vw, 21px); color: var(--fg-2); line-height: 1.5; }
+  .hero__intro { max-width: 40ch; font-size: clamp(17px, 1.3vw, 21px); color: var(--fg-2); line-height: 1.5; }
   .hero__actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
   .hero__meta {
@@ -117,15 +119,12 @@ const fmt = (s: string) => s.replace(/\*(.+?)\*/g, '<em>$1</em>');
 
   @media (max-width: 860px) {
     .hero__bottom { grid-template-columns: 1fr; }
-    .hero__scope {
-      position: relative; top: auto; left: auto; right: auto;
-      width: calc(100% + 2 * var(--gutter)); height: clamp(120px, 26vw, 220px);
-      margin: -12px calc(-1 * var(--gutter));
-    }
+    .hero__scope { height: clamp(110px, 26vw, 200px); margin: -12px calc(-1 * var(--gutter)); }
     .hero__inner { gap: 28px; }
     .line:nth-child(3) .line__in, .line:nth-child(4) .line__in { padding-left: 0; }
   }
   @media (max-width: 560px) {
+    .hero__title { font-size: min(40px, calc((100vw - 2 * var(--gutter)) / (var(--chars) * 0.45))); }
     .hero__meta span:first-child, .hero__meta span:last-child { display: none; }
     .hero__meta { justify-content: center; }
   }
