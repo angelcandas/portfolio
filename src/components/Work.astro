@@ -1,0 +1,199 @@
+---
+import { Picture } from 'astro:assets';
+import { copy, projectMeta, projectOrder, type Lang } from '../i18n/content';
+import micfxMixer from '../assets/projects/micfx-mixer.png';
+import micfxLive from '../assets/projects/micfx-live.png';
+import quecomoShot from '../assets/projects/quecomo.png';
+import llanesShot from '../assets/projects/llanes.png';
+import carlogIcon from '../assets/projects/carlog-icon.svg?raw';
+import homelogIcon from '../assets/projects/homelog-icon.svg?raw';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = copy[lang];
+const feat = t.projects.micfx;
+const rest = projectOrder.filter((id) => id !== 'micfx');
+const pad = (n: number) => String(n).padStart(2, '0');
+const isEs = lang === 'es';
+
+const mock = {
+  carlog: isEs
+    ? [['ITV', 'vence en 23 días'], ['Cambio de aceite', '15.200 km'], ['Media', '1.140 km/mes']]
+    : [['Inspection', 'due in 23 days'], ['Oil change', '15,200 km'], ['Average', '1,140 km/month']],
+  homelog: isEs
+    ? [['Hoy', 'Regar las plantas'], ['Hace 3 días', 'Aspirar el salón'], ['Con retraso', 'Limpiar filtros']]
+    : [['Today', 'Water the plants'], ['3 days ago', 'Vacuum the lounge'], ['Overdue', 'Clean filters']],
+};
+const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+---
+<section id="work" class="section work" aria-labelledby="work-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="label">{t.work.label}</p>
+      <p class="count">{pad(projectOrder.length)} {t.work.count}</p>
+      <h2 id="work-title" data-reveal>{t.work.title}</h2>
+    </div>
+
+    <!-- Featured: MicFX -->
+    <article class="feat" aria-labelledby="p-micfx">
+      <div class="feat__text">
+        <div class="feat__sticky">
+          <p class="proj__idx" data-reveal>01 · {projectMeta.micfx.year}</p>
+          <h3 id="p-micfx" class="feat__name" data-reveal>{feat.name}</h3>
+          <p class="proj__tag" data-reveal>{feat.tag}</p>
+          <p class="feat__summary" data-reveal>{feat.summary}</p>
+          <ul role="list" class="feat__bullets">
+            {feat.bullets.map((b, i) => <li data-reveal style={`--d:${i}`}>{b}</li>)}
+          </ul>
+          <ul role="list" class="chips" data-reveal>
+            {projectMeta.micfx.stack.map((s) => <li>{s}</li>)}
+          </ul>
+          <div class="proj__links" data-reveal>
+            {projectMeta.micfx.links.map((l) => (
+              <a class="btn" data-magnetic href={l.href} target="_blank" rel="noopener">{l.label}<Fragment set:html={arrow} /></a>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div class="feat__media">
+        <figure class="shot shot--desk" data-reveal data-parallax="0.06">
+          <Picture src={micfxMixer} formats={['avif', 'webp']} widths={[700, 1100, 1400]} sizes="(max-width: 960px) 100vw, 58vw" alt={isEs ? 'MicFX en modo DAW: pistas, mezclador con envíos de reverb y chorus y biblioteca de sonidos.' : 'MicFX in DAW mode: tracks, a mixer with reverb and chorus sends, and the sound library.'} />
+        </figure>
+        <dl class="stats">
+          {feat.stats.map((s, i) => (
+            <div class="stat" data-reveal style={`--d:${i}`}>
+              <dt>{s.label}</dt>
+              <dd><span data-count={s.value}>{s.value}</span>{s.suffix}</dd>
+            </div>
+          ))}
+        </dl>
+        <figure class="shot shot--desk" data-reveal data-parallax="-0.04">
+          <Picture src={micfxLive} formats={['avif', 'webp']} widths={[700, 1100, 1400]} sizes="(max-width: 960px) 100vw, 58vw" alt={isEs ? 'MicFX en modo Live con instrumentos MIDI y efectos de voz.' : 'MicFX in Live mode with MIDI instruments and voice effects.'} />
+        </figure>
+      </div>
+    </article>
+
+    <!-- Grid -->
+    <div class="grid">
+      {rest.map((id, i) => {
+        const p = t.projects[id];
+        const m = projectMeta[id];
+        return (
+          <article class={`card card--${id}`} aria-labelledby={`p-${id}`} data-reveal style={`--d:${i % 2}`}>
+            <div class="card__media" data-tilt>
+              {id === 'quecomo' && (
+                <div class="phone"><Picture src={quecomoShot} formats={['avif', 'webp']} widths={[360, 720]} sizes="(max-width: 960px) 60vw, 22vw" alt={isEs ? 'Pantalla «Hoy» de ¿Qué como?: la comida que toca, el plan y la receta de la semana.' : '“Today” screen of ¿Qué como?: the meal that is due, the plan and this week’s recipe.'} /></div>
+              )}
+              {id === 'llanes' && (
+                <div class="browser"><span class="browser__bar" aria-hidden="true"><i></i><i></i><i></i></span><Picture src={llanesShot} formats={['avif', 'webp']} widths={[600, 1000, 1400]} sizes="(max-width: 960px) 90vw, 42vw" alt={isEs ? 'Portada de la Guía de Llanes con titular editorial y avisos de mareas y aparcamiento.' : 'Llanes Guide home page with an editorial headline and tide and parking tips.'} /></div>
+              )}
+              {(id === 'carlog' || id === 'homelog') && (
+                <div class="mock" aria-hidden="true">
+                  <div class="mock__icon" set:html={id === 'carlog' ? carlogIcon : homelogIcon} />
+                  <ul role="list" class="mock__rows">
+                    {mock[id].map(([k, v]) => <li><span>{k}</span><b>{v}</b></li>)}
+                  </ul>
+                </div>
+              )}
+            </div>
+            <div class="card__body">
+              <p class="proj__idx">{pad(i + 2)} · {m.year}</p>
+              <h3 id={`p-${id}`} class="card__name">{p.name}</h3>
+              <p class="proj__tag">{p.tag}</p>
+              <p class="card__summary">{p.summary}</p>
+              <ul role="list" class="chips">{m.stack.map((s) => <li>{s}</li>)}</ul>
+              <div class="proj__links">
+                {m.links.map((l) => (
+                  <a class="link" href={l.href} target="_blank" rel="noopener">{l.label}<span class="sr-only"> · {p.name}</span><Fragment set:html={arrow} /></a>
+                ))}
+                {id !== 'llanes' && <span class="private">{t.work.private}</span>}
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<style>
+  .proj__idx { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 14px; }
+  .proj__tag { font-family: var(--f-mono); font-size: 13px; color: var(--accent); margin-top: 12px; letter-spacing: 0.02em; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 24px; }
+  .chips li { font-family: var(--f-mono); font-size: 11.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--fg-2); }
+  .proj__links { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; margin-top: 28px; }
+
+  /* Featured */
+  .feat { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(32px, 6vw, 96px); padding-bottom: clamp(80px, 10vw, 160px); }
+  .feat__sticky { position: sticky; top: 110px; }
+  .feat__name { font-size: clamp(64px, 10vw, 168px); font-weight: 600; letter-spacing: -0.06em; font-variation-settings: 'wdth' 80; line-height: 0.85; }
+  .feat__summary { margin-top: 28px; font-size: clamp(17px, 1.25vw, 20px); color: var(--fg); max-width: 44ch; }
+  .feat__bullets { margin-top: 24px; display: grid; gap: 12px; }
+  .feat__bullets li { position: relative; padding-left: 24px; color: var(--fg-2); font-size: 15px; line-height: 1.55; max-width: 52ch; }
+  .feat__bullets li::before { content: ''; position: absolute; left: 0; top: 0.72em; width: 12px; height: 1px; background: var(--accent); }
+  .feat__media { display: grid; gap: clamp(20px, 3vw, 40px); align-content: start; }
+
+  .shot { border-radius: var(--radius); overflow: hidden; background: var(--bg-3); border: 1px solid var(--line); box-shadow: 0 40px 120px -40px rgb(124 107 255 / 0.35), 0 20px 60px -30px #000; }
+  .shot :global(img) { width: 100%; }
+
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+  .stat { padding: clamp(18px, 2.4vw, 32px); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; flex-direction: column-reverse; gap: 8px; }
+  .stat dt { font-size: 13px; color: var(--muted); }
+  .stat dd { font-family: var(--f-display); font-size: clamp(44px, 5.6vw, 88px); font-weight: 500; letter-spacing: -0.05em; line-height: 1; font-variant-numeric: tabular-nums; font-variation-settings: 'wdth' 85; }
+
+  /* Grid */
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(56px, 7vw, 120px) clamp(24px, 4vw, 64px); padding-top: clamp(80px, 10vw, 140px); border-top: 1px solid var(--line); }
+  .card:nth-child(even) { margin-top: clamp(0px, 12vw, 200px); }
+  .card__media {
+    --bg: #1a1a1f;
+    position: relative; aspect-ratio: 4 / 3.4; border-radius: var(--radius); overflow: hidden;
+    background: var(--bg);
+    display: grid; place-items: center;
+    transform: perspective(1200px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition: transform 0.6s var(--ease-out);
+  }
+  .card__media::after { content: ''; position: absolute; inset: 0; border-radius: inherit; border: 1px solid rgb(255 255 255 / 0.08); pointer-events: none; }
+  .card--quecomo .card__media { --bg: radial-gradient(120% 90% at 30% 0%, #6e8f2f 0%, #34481a 55%, #1b250e 100%); }
+  .card--llanes .card__media { --bg: radial-gradient(120% 90% at 70% 0%, #c88b3a 0%, #6b4a1f 50%, #2a1d0d 100%); }
+  .card--carlog .card__media { --bg: radial-gradient(120% 90% at 50% 0%, #5b6573 0%, #262a31 55%, #121417 100%); }
+  .card--homelog .card__media { --bg: radial-gradient(120% 90% at 50% 0%, #3f7a80 0%, #234a4e 55%, #11272a 100%); }
+
+  .phone { width: 46%; max-width: 280px; border-radius: 34px; padding: 8px; background: #0b0b0d; box-shadow: 0 40px 80px -30px rgb(0 0 0 / 0.8); transform: translateY(14%) rotate(-4deg); transition: transform 0.9s var(--ease-out); }
+  .phone :global(img) { border-radius: 27px; }
+  .card:hover .phone { transform: translateY(8%) rotate(-1deg) scale(1.03); }
+
+  .browser { width: 88%; border-radius: 12px; overflow: hidden; background: #f0f1e8; box-shadow: 0 40px 80px -30px rgb(0 0 0 / 0.8); transform: translate(6%, 10%); transition: transform 0.9s var(--ease-out); }
+  .browser__bar { display: flex; gap: 6px; padding: 10px 12px; background: #e2e4d8; }
+  .browser__bar i { width: 9px; height: 9px; border-radius: 50%; background: #c4c6ba; }
+  .card:hover .browser { transform: translate(3%, 6%) scale(1.02); }
+
+  .mock { width: 72%; display: grid; gap: 18px; justify-items: center; transition: transform 0.9s var(--ease-out); }
+  .card:hover .mock { transform: translateY(-4%); }
+  .mock__icon { width: clamp(64px, 9vw, 104px); filter: drop-shadow(0 20px 40px rgb(0 0 0 / 0.5)); }
+  .mock__icon :global(svg) { width: 100%; height: auto; }
+  .mock__rows { width: 100%; display: grid; gap: 8px; }
+  .mock__rows li { display: flex; justify-content: space-between; gap: 12px; padding: 12px 16px; border-radius: 14px; background: rgb(255 255 255 / 0.07); border: 1px solid rgb(255 255 255 / 0.1); backdrop-filter: blur(6px); font-size: clamp(12px, 1vw, 14px); }
+  .mock__rows li:nth-child(2) { transform: translateX(6%); opacity: 0.85; }
+  .mock__rows li:nth-child(3) { transform: translateX(-4%); opacity: 0.65; }
+  .mock__rows span { color: rgb(255 255 255 / 0.65); font-family: var(--f-mono); font-size: 0.85em; }
+  .mock__rows b { font-weight: 600; }
+
+  .card__body { padding-top: 28px; }
+  .card__name { font-size: clamp(36px, 4.4vw, 68px); font-weight: 500; letter-spacing: -0.05em; font-variation-settings: 'wdth' 85; }
+  .card__summary { margin-top: 18px; color: var(--fg-2); font-size: 16px; max-width: 52ch; }
+
+  .link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 600; font-size: 15px; position: relative; }
+  .link::after { content: ''; position: absolute; left: 0; right: 24px; bottom: 9px; height: 1px; background: var(--accent); transform-origin: left; transition: transform 0.5s var(--ease-out); }
+  .link:hover::after { transform: scaleX(0); transform-origin: right; }
+  .link :global(svg) { width: 14px; height: 14px; color: var(--accent); transition: transform 0.5s var(--ease-out); }
+  .link:hover :global(svg) { transform: translate(3px, -3px); }
+  .private { font-family: var(--f-mono); font-size: 11.5px; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
+  .private::before { content: ''; width: 6px; height: 6px; border-radius: 2px; border: 1px solid currentColor; }
+
+  @media (max-width: 960px) {
+    .feat { grid-template-columns: 1fr; }
+    .feat__sticky { position: static; }
+    .grid { grid-template-columns: 1fr; }
+    .card:nth-child(even) { margin-top: 0; }
+  }
+</style>

@@ -1,27 +1,13 @@
-# Portfolio
+# sobrinotech.com
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.3.
+Portfolio de Angel Candas. Astro, CSS a mano y unas 200 líneas de TypeScript para el movimiento
+(osciloscopio en canvas, revelado al hacer scroll, botones magnéticos). Bilingüe: `/` en español y `/en/` en inglés.
 
-## Development server
+- Contenido: `src/i18n/content.ts`
+- Componentes: `src/components/`
+- Estilos globales: `src/styles/global.css`
+- Comportamiento: `src/scripts/main.ts` (todo es mejora progresiva; sin JS la página está completa)
+- Pruebas: `tests/run.mjs` (axe WCAG 2.2 AA, sin scroll horizontal, sin errores de consola, capturas en 3 tamaños, con y sin animaciones)
+- Publicar: ver [DEPLOY.md](DEPLOY.md)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Lighthouse (móvil y escritorio): 100 en rendimiento, accesibilidad, buenas prácticas y SEO.

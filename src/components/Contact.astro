@@ -1,0 +1,58 @@
+---
+import { copy, site, type Lang } from '../i18n/content';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = copy[lang];
+const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+---
+<section id="contact" class="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <p class="label">{t.contact.label}</p>
+    <h2 id="contact-title" class="contact__title">
+      {t.contact.title.map((l, i) => <span class="cl" data-reveal style={`--d:${i}`}>{l}</span>)}
+    </h2>
+    <p class="contact__body" data-reveal>{t.contact.body}</p>
+    <ul role="list" class="contact__links" data-reveal>
+      <li><a class="big" href={site.linkedin} target="_blank" rel="me noopener" data-magnetic><span>LinkedIn</span><Fragment set:html={arrow} /></a></li>
+      <li><a class="big" href={site.github} target="_blank" rel="me noopener" data-magnetic><span>GitHub</span><Fragment set:html={arrow} /></a></li>
+      {site.email && <li><a class="big" href={`mailto:${site.email}`} data-magnetic><span>{t.contact.email}</span><Fragment set:html={arrow} /></a></li>}
+    </ul>
+  </div>
+
+  <footer class="foot wrap">
+    <p>© {new Date().getFullYear()} · {t.footer.built}</p>
+    <p>{site.location} · {t.footer.local} <time data-clock>--:--</time></p>
+    <a href="#top" class="totop">{t.footer.top} ↑</a>
+  </footer>
+</section>
+
+<style>
+  .contact { position: relative; padding-top: clamp(112px, 16vw, 240px); overflow: clip; isolation: isolate; }
+  .contact::before {
+    content: ''; position: absolute; z-index: -1; left: 50%; bottom: -40%;
+    width: 120vw; aspect-ratio: 1; transform: translateX(-50%);
+    background: radial-gradient(closest-side, rgb(200 255 61 / 0.16), rgb(124 107 255 / 0.08) 50%, transparent 72%);
+  }
+  .contact__title { margin-top: 28px; font-size: clamp(56px, 12.5vw, 220px); font-weight: 500; letter-spacing: -0.065em; line-height: 0.88; font-variation-settings: 'wdth' 78; }
+  .cl { display: block; }
+  .cl:last-child { color: var(--accent); padding-left: 0.6em; }
+  .contact__body { margin-top: 32px; font-size: clamp(18px, 1.6vw, 24px); color: var(--fg-2); }
+  .contact__links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 44px; }
+  .big {
+    display: inline-flex; align-items: center; gap: 14px;
+    padding: 18px 30px; border-radius: 999px; border: 1px solid var(--line-2);
+    font-family: var(--f-display); font-size: clamp(20px, 2vw, 28px); letter-spacing: -0.03em;
+    position: relative; overflow: hidden; isolation: isolate;
+    transition: color 0.5s var(--ease-out), border-color 0.5s;
+  }
+  .big::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--accent); transform: translateY(101%); border-radius: inherit; transition: transform 0.6s var(--ease-out); }
+  .big:hover::before, .big:focus-visible::before { transform: none; }
+  .big:hover, .big:focus-visible { color: var(--accent-ink); border-color: var(--accent); }
+  .big :global(svg) { width: 20px; height: 20px; transition: transform 0.5s var(--ease-out); }
+  .big:hover :global(svg) { transform: translate(3px, -3px) rotate(0deg); }
+
+  .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; align-items: center; margin-top: clamp(96px, 14vw, 200px); padding-block: 28px; border-top: 1px solid var(--line); font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+  .foot time { color: var(--fg); font-variant-numeric: tabular-nums; }
+  .totop { min-height: 44px; display: inline-flex; align-items: center; }
+  .totop:hover { color: var(--accent); }
+</style>

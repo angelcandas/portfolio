@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import { copy } from '../i18n/content';
+const t = copy.es.notFound;
+const te = copy.en.notFound;
+---
+<Base lang="es" title={`404 · ${t.title}`} noindex>
+  <main id="main" class="nf wrap">
+    <p class="label">404</p>
+    <h1>{t.title}</h1>
+    <p>{t.body} <span lang="en">{te.body}</span></p>
+    <a class="btn btn--solid" href="/">{t.back}</a>
+  </main>
+</Base>
+<style>
+  .nf { min-height: 100svh; display: grid; align-content: center; gap: 24px; }
+  .nf h1 { font-size: clamp(56px, 12vw, 200px); font-weight: 500; letter-spacing: -0.06em; font-variation-settings: 'wdth' 80; }
+  .nf p:not(.label) { color: var(--fg-2); }
+  .nf .btn { justify-self: start; }
+</style>
