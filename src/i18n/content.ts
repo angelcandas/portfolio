@@ -48,7 +48,7 @@ const shared = {
   },
   homelog: {
     year: '2026',
-    stack: ['PWA', 'Firestore', 'Offline sync'],
+    stack: ['PWA', 'Firestore', 'Offline-first'],
     links: [{ label: 'App', href: 'https://homelog-quecomo.web.app' }],
   },
   llanes: {
@@ -66,7 +66,7 @@ const es = {
   meta: {
     title: 'Ángel Candás · Frontend Tech Lead · Pagos regulados',
     description:
-      'Ángel Candás, tech lead frontend en Valencia. Lidera el frontend del portal de empresas de un banco de compensación británico: pagos con PSD2, React, Next.js y TypeScript, y un equipo de 5 ingenieros senior.',
+      'Ángel Candás, Frontend Tech Lead en Valencia. Lidera el frontend del portal de empresas de un banco de compensación británico: pagos con PSD2, React, Next.js y TypeScript, y un equipo de 5 ingenieros senior.',
   },
   nav: { experience: 'Experiencia', work: 'Proyectos', about: 'Perfil', contact: 'Contacto', switch: 'EN', switchHref: '/', switchLabel: 'Read in English' },
   skip: 'Saltar al contenido',
@@ -76,7 +76,7 @@ const es = {
     location: 'Valencia, España · Remoto en Europa',
     lines: ['Lidero equipos frontend', 'que construyen productos de *pagos*', 'y publican cada semana.'],
     intro:
-      'Más de 10 años creando aplicaciones web con React y TypeScript, los últimos siete al frente de equipos pequeños. Hoy dirijo el frontend del portal de empresas de un banco de compensación británico, con PSD2 y WCAG 2.1 AA.',
+      'Más de diez años creando aplicaciones web con React y TypeScript, los últimos siete al frente de equipos pequeños. Hoy dirijo el frontend del portal de empresas de un banco de compensación británico, con PSD2 y WCAG 2.1 AA.',
     experience: 'Ver experiencia',
     scroll: 'Desliza',
   },
@@ -86,13 +86,13 @@ const es = {
     title: 'Dónde trabajo ahora',
     case: {
       eyebrow: 'Wizeline · Cliente actual',
-      title: 'Reconstruyendo el portal de empresas de un banco de compensación británico',
+      title: 'Reconstrucción del portal de empresas de un banco de compensación británico',
       summary:
-        'Las empresas clientes del banco hacen pagos, los aprueban y gestionan sus usuarios en este portal. Dirijo su reconstrucción en React, Next.js con SSR y Material-UI. El portal nuevo está en beta cerrada y sustituirá a uno en producción que usan miles de usuarios técnicos B2B.',
+        'Las empresas clientes del banco hacen pagos, los aprueban y gestionan sus usuarios en este portal. Dirijo su reconstrucción en React, Next.js con SSR y Material-UI. El portal nuevo está en beta cerrada y sustituirá al portal actual, que usan miles de usuarios de empresa.',
       stats: [
         { value: '5', count: 5, label: 'ingenieros senior a mi cargo' },
         { value: 'Semanal', label: 'publicación en producción' },
-        { value: '53 → 83', label: 'Lighthouse del dashboard frente al portal antiguo' },
+        { value: '53 → 83', label: 'rendimiento Lighthouse del dashboard, del portal antiguo al nuevo' },
         { value: '5', count: 5, label: 'tipos de pago cubiertos con pruebas end-to-end' },
       ] as Stat[],
       bullets: [
@@ -100,16 +100,16 @@ const es = {
         'Flujos de pago y aprobación con patrones de reautenticación PSD2, accesibles según WCAG 2.1 AA.',
         'Pruebas end-to-end montadas desde cero con Cypress y Playwright: smoke tests, 5 tipos de pago, aprobaciones y alta y baja de usuarios.',
         'Cada semana sale una versión a producción tras feature flags, con Azure App Configuration y una capa de flags propia.',
-        'Monitorización con Application Insights y Microsoft Clarity. Lighthouse frente al portal antiguo: formulario de pago de 44 a 63 y aprobaciones de 55 a 64.',
+        'Monitorización con Application Insights y Microsoft Clarity. La puntuación de Lighthouse también mejora en otras pantallas respecto al portal antiguo: formulario de pago de 44 a 63 y aprobaciones de 55 a 64.',
       ],
-      stack: ['React', 'Next.js SSR', 'Material-UI', 'BFF en JavaScript', 'Cypress', 'Playwright', 'Azure App Configuration', 'Application Insights'],
+      stack: ['React', 'Next.js SSR', 'Material-UI', 'BFF en JavaScript', 'PSD2', 'WCAG 2.1 AA'],
       flowLabel: 'Cómo sale cada versión',
       flow: [
         { k: 'Merge', v: 'Rama principal' },
         { k: 'E2E', v: 'Cypress y Playwright' },
         { k: 'Flag', v: 'Azure App Configuration' },
-        { k: 'Release', v: 'Producción, cada semana' },
-        { k: 'Monitor', v: 'Application Insights y Clarity' },
+        { k: 'Publicación', v: 'Producción, cada semana' },
+        { k: 'Monitorización', v: 'Application Insights y Clarity' },
       ],
     },
     rowsLabel: 'Trayectoria',
@@ -120,7 +120,7 @@ const es = {
         period: 'Ene 2022 – hoy',
         place: 'Remoto',
         role: 'Senior Frontend Engineer · Technical Lead',
-        text: 'Lidero el frontend del portal bancario de arriba. Construí con otros compañeros un entorno de desarrollo con IA de unos 100 archivos (guías, skills, agentes e instrucciones) para GitHub Copilot con modelos de Claude y OpenAI. He sido mentor de varios ingenieros que después ascendieron. Clientes anteriores: Inditex (módulos nuevos en una plataforma de micro-frontends que comparten más de 50 squads de producto), Dow Jones (herramientas editoriales y de gráficos) y CloudPay (migración de la interfaz de nóminas a Vue 3 y KendoUI).',
+        text: 'Lidero el frontend del portal bancario que describo más arriba. Construí con otros compañeros un entorno de desarrollo con IA de unos 100 archivos (guías, skills, agentes e instrucciones) para GitHub Copilot con modelos de Claude y OpenAI. He sido mentor de varios ingenieros que después ascendieron. Clientes anteriores: Inditex (módulos nuevos en una plataforma de micro-frontends que comparten más de 50 squads de producto), Dow Jones (herramientas editoriales y de gráficos) y CloudPay (migración de la interfaz de nóminas a Vue 3 y KendoUI).',
         stack: ['React', 'Next.js', 'Micro-frontends', 'Vue 3', 'GitHub Copilot'],
       },
       {
@@ -129,7 +129,7 @@ const es = {
         period: 'Ene 2019 – ene 2022',
         place: 'Zúrich, en remoto',
         role: 'Lead Frontend Engineer',
-        text: 'Startup respaldada por la ESA que planifica trazados de líneas eléctricas para operadores de red. Lideré a 5 ingenieros en la plataforma WebGIS y planificar el trazado de una línea pasó de semanas a días. Me encargué de la arquitectura frontend, CI/CD y la incorporación de gente nueva, y dirigí una gran refactorización de React a Context y Hooks.',
+        text: 'Startup respaldada por la ESA que planifica trazados de líneas eléctricas para operadores de red. Lideré a 5 ingenieros en la plataforma WebGIS y planificar el trazado de una línea pasó de semanas a días. Me encargué de la arquitectura frontend, CI/CD y la incorporación de gente nueva, y dirigí una refactorización a fondo del código React para pasar a Context y Hooks.',
         stack: ['React', 'WebGIS', 'CI/CD'],
       },
       {
@@ -155,7 +155,7 @@ const es = {
       name: 'Crypto Tax ES',
       tag: 'Gestor fiscal para inversores en cripto en España',
       summary:
-        'Importa las operaciones de Kraken y Binance a través de sus APIs firmadas, calcula el coste de adquisición por FIFO y exporta los modelos de Hacienda. Lo construí en 2026 con Claude Code.',
+        'Importa las operaciones de Kraken y Binance a través de sus APIs firmadas, calcula el coste de adquisición por FIFO y exporta los modelos de Hacienda.',
       flowLabel: 'Del exchange al modelo de Hacienda',
       flow: ['Kraken · Binance', 'APIs firmadas', 'Coste FIFO', 'Modelos fiscales'],
     },
@@ -172,13 +172,13 @@ const es = {
     },
     quecomo: {
       name: '¿Qué como?',
-      tag: 'Plan de comidas como app',
+      tag: 'Planificador de comidas',
       summary: 'Dice qué toca comer, monta la semana y crea la lista de la compra con precios reales. Tiene un bot de Telegram.',
     },
     carlog: {
       name: 'CarLog',
       tag: 'Los coches de casa, al día',
-      summary: 'Averías, ITV, seguro, kilómetros y facturas de los coches de la familia, compartidos y sin conexión.',
+      summary: 'Averías, ITV, seguro, kilómetros y facturas de los coches de la familia, compartidos y disponibles sin conexión.',
     },
     homelog: {
       name: 'HomeLog',
@@ -187,7 +187,7 @@ const es = {
     },
     llanes: {
       name: 'Guía de Llanes',
-      tag: 'Guía de viaje de un local',
+      tag: 'Guía de viaje escrita por un llanisco',
       summary: 'Playas, rutas y restaurantes de Llanes (Asturias), con diseño editorial y versión en PDF.',
     },
   },
@@ -198,11 +198,11 @@ const es = {
       { value: 10, suffix: '+', label: 'años con React y TypeScript' },
       { value: 7, suffix: '', label: 'años liderando equipos' },
       { value: 50, suffix: '+', label: 'squads de producto comparten la plataforma de Inditex para la que construí módulos' },
-      { value: 83, suffix: '', label: 'Lighthouse del nuevo dashboard bancario (antes 53)' },
+      { value: 83, suffix: '', label: 'rendimiento Lighthouse del nuevo dashboard bancario (antes 53)' },
     ],
     body: [
-      'Soy ingeniero de telecomunicaciones (Universidad de Oviedo) con un máster en mecatrónica (UPV). Hoy lidero el equipo frontend que reconstruye el portal de clientes empresa de un banco de compensación británico: pagos, aprobaciones y usuarios, con PSD2, WCAG 2.1 AA y una versión nueva cada semana.',
-      'Me gusta hacerme cargo de un área de producto de principio a fin: arquitectura, pruebas y lo que hace la gente después de cada versión. En el trabajo usamos GitHub Copilot con modelos de Claude y OpenAI, y en mis proyectos uso Claude Code.',
+      'Soy ingeniero de telecomunicaciones (Universidad de Oviedo) con un máster en mecatrónica (UPV). Lidero el equipo frontend que reconstruye el portal de empresas de un banco de compensación británico: pagos, aprobaciones y usuarios, con PSD2, WCAG 2.1 AA y una versión nueva cada semana.',
+      'Me gusta hacerme cargo de un área de producto de principio a fin: arquitectura, pruebas y cómo usa la gente el producto tras cada versión. En el trabajo usamos GitHub Copilot con modelos de Claude y OpenAI, y en mis proyectos uso Claude Code.',
     ],
     capsLabel: 'Lo que hago',
     caps: [
@@ -215,7 +215,7 @@ const es = {
   contact: {
     label: 'Contacto',
     title: ['Hablemos.'],
-    body: 'Escríbeme sobre un puesto o sobre cualquier cosa de esta página.',
+    body: 'Escríbeme si tienes un puesto en mente o quieres comentar algo de esta página.',
     email: 'Escribir un correo',
   },
   footer: { built: 'Diseñado y construido por Ángel Candás', local: 'Hora local', top: 'Volver arriba' },
@@ -255,7 +255,7 @@ const en: Copy = {
       stats: [
         { value: '5', count: 5, label: 'senior engineers led' },
         { value: 'Weekly', label: 'production releases' },
-        { value: '53 → 83', label: 'dashboard Lighthouse score against the legacy portal' },
+        { value: '53 → 83', label: 'dashboard Lighthouse performance, legacy portal to new' },
         { value: '5', count: 5, label: 'payment types under end-to-end tests' },
       ] as Stat[],
       bullets: [
@@ -263,9 +263,9 @@ const en: Copy = {
         'Payment and approval flows use PSD2 reauthentication patterns and meet WCAG 2.1 AA.',
         'I set up end-to-end testing from scratch with Cypress and Playwright: smoke tests, 5 payment types, approvals, and user creation and deletion.',
         'A release goes to production every week behind feature flags, using Azure App Configuration and a custom flag layer.',
-        'Monitoring runs on Application Insights and Microsoft Clarity. Lighthouse against the legacy portal: payment form 44 to 63, approvals 55 to 64.',
+        'Monitoring runs on Application Insights and Microsoft Clarity. Other screens also beat the legacy portal on Lighthouse: payment form 44 to 63, approvals 55 to 64.',
       ],
-      stack: ['React', 'Next.js SSR', 'Material-UI', 'JavaScript BFF', 'Cypress', 'Playwright', 'Azure App Configuration', 'Application Insights'],
+      stack: ['React', 'Next.js SSR', 'Material-UI', 'JavaScript BFF', 'PSD2', 'WCAG 2.1 AA'],
       flowLabel: 'How each release ships',
       flow: [
         { k: 'Merge', v: 'Main branch' },
@@ -318,7 +318,7 @@ const en: Copy = {
       name: 'Crypto Tax ES',
       tag: 'Tax manager for Spanish crypto investors',
       summary:
-        'Imports trades from Kraken and Binance through their signed APIs, computes FIFO cost basis and exports the Spanish tax forms. Built in 2026 with Claude Code.',
+        'Imports trades from Kraken and Binance through their signed APIs, computes FIFO cost basis and exports the Spanish tax forms.',
       flowLabel: 'From exchange to tax form',
       flow: ['Kraken · Binance', 'Signed APIs', 'FIFO cost basis', 'Tax forms'],
     },
@@ -361,7 +361,7 @@ const en: Copy = {
       { value: 10, suffix: '+', label: 'years with React and TypeScript' },
       { value: 7, suffix: '', label: 'years leading teams' },
       { value: 50, suffix: '+', label: 'product squads sharing the Inditex platform I built modules for' },
-      { value: 83, suffix: '', label: 'Lighthouse on the new banking dashboard (was 53)' },
+      { value: 83, suffix: '', label: 'Lighthouse performance on the new banking dashboard (was 53)' },
     ],
     body: [
       'I’m a telecommunications engineer (University of Oviedo) with a master’s in mechatronics (UPV). Today I lead the frontend team rebuilding a UK clearing bank’s business customer portal: payments, approvals and user management, under PSD2 and WCAG 2.1 AA, released every week.',
@@ -388,5 +388,5 @@ const en: Copy = {
 export const copy: Record<Lang, Copy> = { es, en };
 export const smallProjects: SmallProjectId[] = ['quecomo', 'carlog', 'homelog', 'llanes'];
 // Apps that show a sign-in screen to a visitor who is not logged in.
-export const signInRequired: SmallProjectId[] = [];
+export const signInRequired: SmallProjectId[] = ['quecomo', 'carlog', 'homelog'];
 export { shared as projectMeta };

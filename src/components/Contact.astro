@@ -15,8 +15,8 @@ const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 
     <ul role="list" class="contact__links" data-reveal>
       <li><a class="big" href={site.linkedin} target="_blank" rel="me noopener" data-magnetic><span>LinkedIn</span><Fragment set:html={arrow} /></a></li>
       <li><a class="big" href={site.github} target="_blank" rel="me noopener" data-magnetic><span>GitHub</span><Fragment set:html={arrow} /></a></li>
+      {site.email[lang] && <li><a class="big" href={`mailto:${site.email[lang]}`} data-magnetic><span>{site.email[lang]}</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12v8H2zM2 4.5l6 4.5 6-4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></a></li>}
       <li><a class="big" href={site.cv} download data-magnetic><span>{t.cv}</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v9M4 7.5 8 11.5l4-4M3 14h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-      {site.email[lang] && <li><a class="big" href={`mailto:${site.email[lang]}`} data-magnetic><span>{site.email[lang]}</span><Fragment set:html={arrow} /></a></li>}
     </ul>
   </div>
 
@@ -52,6 +52,10 @@ const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 
   .big :global(svg) { width: 20px; height: 20px; transition: transform 0.5s var(--ease-out); }
   .big:hover :global(svg) { transform: translate(3px, -3px) rotate(0deg); }
 
+  @media (max-width: 560px) {
+    .contact__links { display: grid; grid-template-columns: 1fr; }
+    .big { justify-content: space-between; }
+  }
   .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; align-items: center; margin-top: clamp(96px, 14vw, 200px); padding-block: 28px; border-top: 1px solid var(--line); font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
   .foot time { color: var(--fg); font-variant-numeric: tabular-nums; }
   .totop { min-height: 44px; display: inline-flex; align-items: center; }
