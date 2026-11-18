@@ -20,7 +20,7 @@ fi
 echo "Account ID: $ACCOUNT_ID"
 
 say "2/5 · Crear el proyecto de Pages \"$PROJECT\" (si no existe)"
-npx --yes wrangler@4 pages project create "$PROJECT" --production-branch=main 2>&1 | tail -2 || true
+npx --yes wrangler@4 pages project create "$PROJECT" --production-branch=master 2>&1 | tail -2 || true
 
 say "3/5 · Crear un token de API para GitHub Actions"
 URL="https://dash.cloudflare.com/profile/api-tokens"
@@ -41,5 +41,5 @@ for d in "$DOMAIN" "www.$DOMAIN"; do
     --data "{\"name\":\"$d\"}" >/dev/null && echo "  ✓ $d añadido" || echo "  · $d: ya estaba o hay que añadirlo a mano (ver DEPLOY.md)"
 done
 
-say "Listo. Lanza el primer despliegue con:  gh workflow run deploy.yml --ref main"
+say "Listo. Lanza el primer despliegue con:  gh workflow run deploy.yml --ref master"
 echo "Comprueba el dominio en: https://dash.cloudflare.com/?to=/:account/pages/view/$PROJECT/domains"

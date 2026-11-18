@@ -1,11 +1,11 @@
 # Publicar sobrinotech.com en Cloudflare Pages
 
-El sitio es estático (Astro). Cada push a `main` pasa las pruebas en GitHub Actions y, si todo va bien,
+El sitio es estático (Astro). Cada push a `master` pasa las pruebas en GitHub Actions y, si todo va bien,
 se publica en Cloudflare Pages. Cada pull request se publica también en una URL de vista previa.
 
 ```
 push / PR ─▶ GitHub Actions: build · astro check · pruebas (axe, desbordes, consola) ─▶ wrangler pages deploy
-                                                                                      ├─ main  → sobrinotech.com
+                                                                                      ├─ master → sobrinotech.com
                                                                                       └─ rama → <rama>.sobrinotech.pages.dev
 ```
 
@@ -21,7 +21,7 @@ bash tools/setup-cloudflare.sh
 El script:
 
 1. Inicia sesión en Cloudflare con `wrangler login`.
-2. Crea el proyecto de Pages `sobrinotech` con `main` como rama de producción.
+2. Crea el proyecto de Pages `sobrinotech` con `master` como rama de producción.
 3. Te pide un token de API (Create Custom Token → **Account · Cloudflare Pages · Edit**).
 4. Guarda `CLOUDFLARE_API_TOKEN` y `CLOUDFLARE_ACCOUNT_ID` como secretos del repositorio.
 5. Añade `sobrinotech.com` y `www.sobrinotech.com` como dominios del proyecto.
