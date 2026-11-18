@@ -23,7 +23,7 @@ const server = http.createServer((req, res) => handler(req, res, { public: root,
 await new Promise((r) => server.listen(4321, r));
 const base = 'http://localhost:4321';
 
-const pages = ['/', '/en/', '/404'];
+const pages = ['/', '/es/', '/404'];
 const viewports = [
   { name: 'phone', width: 390, height: 844 },
   { name: 'tablet', width: 834, height: 1112 },

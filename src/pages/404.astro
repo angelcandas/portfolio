@@ -1,14 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
 import { copy } from '../i18n/content';
-const t = copy.es.notFound;
-const te = copy.en.notFound;
+const t = copy.en.notFound;
+const te = copy.es.notFound;
 ---
-<Base lang="es" title={`404 · ${t.title}`} noindex>
+<Base lang="en" title={`404 · ${t.title}`} noindex>
   <main id="main" class="nf wrap">
     <p class="label">404</p>
     <h1>{t.title}</h1>
-    <p>{t.body} <span lang="en">{te.body}</span></p>
+    <p>{t.body} <span lang="es">{te.body}</span></p>
     <a class="btn btn--solid" href="/">{t.back}</a>
   </main>
 </Base>

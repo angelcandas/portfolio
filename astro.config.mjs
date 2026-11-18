@@ -7,7 +7,7 @@ export default defineConfig({
   trailingSlash: 'ignore',
   integrations: [
     sitemap({
-      i18n: { defaultLocale: 'es', locales: { es: 'es-ES', en: 'en-US' } },
+      i18n: { defaultLocale: 'en', locales: { en: 'en-US', es: 'es-ES' } },
       filter: (page) => !page.includes('404'),
     }),
   ],

@@ -3,7 +3,7 @@ import { copy, type Lang } from '../i18n/content';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = copy[lang];
-const home = lang === 'es' ? '/' : '/en/';
+const home = lang === 'es' ? '/es/' : '/';
 ---
 <header class="nav" data-nav>
   <div class="nav__inner wrap">
