@@ -1,0 +1,130 @@
+---
+import { copy, type Lang } from '../i18n/content';
+interface Props { lang: Lang }
+const t = copy[Astro.props.lang].experience;
+const c = t.case;
+---
+<section id="experience" class="section exp" aria-labelledby="exp-title">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="label">{t.label}</p>
+      <h2 id="exp-title" data-reveal>{t.title}</h2>
+    </div>
+
+    <article class="case" aria-labelledby="case-title">
+      <div class="case__text">
+        <p class="case__eyebrow" data-reveal>{c.eyebrow}</p>
+        <h3 id="case-title" class="case__title" data-reveal>{c.title}</h3>
+        <p class="case__summary" data-reveal>{c.summary}</p>
+        <ul role="list" class="case__bullets">
+          {c.bullets.map((b, i) => <li data-reveal style={`--d:${i}`}>{b}</li>)}
+        </ul>
+      </div>
+
+      <div class="case__side">
+        <dl class="tiles">
+          {c.stats.map((s, i) => (
+            <div class="tile" data-reveal style={`--d:${i}`}>
+              <dt>{s.label}</dt>
+              <dd>{s.count !== undefined ? <span data-count={s.count}>{s.value}</span> : s.value}</dd>
+            </div>
+          ))}
+        </dl>
+
+        <div class="flow" data-reveal>
+          <p class="flow__label">{c.flowLabel}</p>
+          <ol role="list" class="flow__steps">
+            {c.flow.map((f) => <li><b>{f.k}</b><span>{f.v}</span></li>)}
+          </ol>
+        </div>
+
+        <ul role="list" class="chips" data-reveal>
+          {c.stack.map((s) => <li>{s}</li>)}
+        </ul>
+      </div>
+    </article>
+
+    <h3 class="sub label">{t.rowsLabel}</h3>
+    <ol role="list" class="rows">
+      {t.rows.map((r, i) => (
+        <li class="row" data-reveal style={`--d:${i}`}>
+          <p class="row__period">{r.period}<span>{r.place}</span></p>
+          <div class="row__body">
+            <h4 class="row__org">{r.org}{r.note && <span class="row__note"> ({r.note})</span>}</h4>
+            {r.role && <p class="row__role">{r.role}</p>}
+            <p class="row__text">{r.text}</p>
+            <ul role="list" class="chips">{r.stack.map((s) => <li>{s}</li>)}</ul>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .exp { padding-top: clamp(80px, 10vw, 140px); }
+  .exp .section-head h2 { font-size: clamp(44px, 7vw, 120px); }
+
+  .case {
+    display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(32px, 5vw, 80px);
+    padding-bottom: clamp(64px, 8vw, 120px);
+  }
+  .case__eyebrow { font-family: var(--f-mono); font-size: 12.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  .case__title {
+    margin-top: 18px;
+    font-size: clamp(36px, 4.6vw, 76px); font-weight: 500; line-height: 0.98;
+    letter-spacing: -0.045em; font-variation-settings: 'wdth' 82;
+  }
+  .case__summary { margin-top: 24px; font-size: clamp(17px, 1.25vw, 20px); color: var(--fg); max-width: 52ch; }
+  .case__bullets { margin-top: 24px; display: grid; gap: 12px; }
+  .case__bullets li { position: relative; padding-left: 24px; color: var(--fg-2); font-size: 15.5px; line-height: 1.55; max-width: 60ch; }
+  .case__bullets li::before { content: ''; position: absolute; left: 0; top: 0.75em; width: 12px; height: 1px; background: var(--accent); }
+
+  .case__side { display: grid; gap: 28px; align-content: start; }
+  .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+  .tile { padding: clamp(18px, 2vw, 28px); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 10px; }
+  .tile dt { font-size: 13.5px; color: var(--muted); line-height: 1.4; }
+  .tile dd {
+    font-family: var(--f-display); font-size: clamp(36px, 3.6vw, 60px); font-weight: 500; line-height: 1;
+    letter-spacing: -0.045em; font-variation-settings: 'wdth' 85; font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .tile:nth-child(1) dd, .tile:nth-child(3) dd { color: var(--accent); }
+
+  .flow { border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; background: rgb(255 255 255 / 0.02); }
+  .flow__label { font-family: var(--f-mono); font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .flow__steps { margin-top: 16px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; counter-reset: s; }
+  .flow__steps li { position: relative; display: grid; gap: 6px; padding-top: 22px; padding-right: 10px; }
+  .flow__steps li::before { content: ''; position: absolute; top: 4px; left: 0; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+  .flow__steps li::after { content: ''; position: absolute; top: 8px; left: 14px; right: 4px; height: 1px; background: linear-gradient(90deg, var(--line-2), var(--line)); }
+  .flow__steps li:last-child::after { display: none; }
+  .flow__steps b { font-family: var(--f-display); font-size: 17px; font-weight: 600; letter-spacing: -0.02em; }
+  .flow__steps span { font-size: 12.5px; color: var(--fg-2); line-height: 1.35; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chips li { font-family: var(--f-mono); font-size: 11.5px; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--fg-2); }
+
+  .sub { margin-bottom: 8px; }
+  .rows { border-top: 1px solid var(--line); }
+  .row { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: 8px 32px; padding: 32px 0; border-bottom: 1px solid var(--line); }
+  .row__period { font-family: var(--f-mono); font-size: 12.5px; letter-spacing: 0.04em; color: var(--fg-2); display: grid; gap: 6px; align-content: start; padding-top: 6px; }
+  .row__period span { color: var(--muted); }
+  .row__org { font-size: clamp(24px, 2.4vw, 36px); font-weight: 500; letter-spacing: -0.035em; }
+  .row__note { font-family: var(--f-body, inherit); font-size: 0.5em; letter-spacing: 0; color: var(--muted); font-weight: 400; white-space: nowrap; }
+  .row__role { margin-top: 6px; font-family: var(--f-mono); font-size: 12.5px; color: var(--accent); }
+  .row__text { margin-top: 14px; color: var(--fg-2); font-size: 15.5px; line-height: 1.6; max-width: 72ch; }
+  .row .chips { margin-top: 16px; }
+
+  @media (max-width: 1080px) {
+    .case { grid-template-columns: 1fr; }
+    .flow__steps { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  }
+  @media (max-width: 640px) {
+    .flow__steps { grid-template-columns: 1fr; gap: 14px; }
+    .flow__steps li { padding: 0 0 0 26px; }
+    .flow__steps li::before { top: 6px; }
+    .flow__steps li::after { top: 18px; left: 4px; right: auto; bottom: -12px; width: 1px; height: auto; background: var(--line-2); }
+    .row { grid-template-columns: 1fr; padding: 26px 0; }
+    .row__note { white-space: normal; display: block; margin-top: 4px; font-size: 14px; }
+    .tile dd { font-size: 34px; }
+  }
+</style>
