@@ -81,7 +81,7 @@ const es = {
   cvShort: 'CV',
   hero: {
     kicker: 'Senior Frontend Engineer · Tech Lead',
-    location: 'Valencia, España · Remoto en Europa (CET)',
+    location: 'Valencia, España · Ciudadano de la UE · Remoto en Europa (CET)',
     title: 'Construyo y lidero frontend para *pagos regulados*.',
     intro:
       'Más de diez años con React y TypeScript, siete de ellos liderando equipos. Hoy dirijo el frontend del portal de empresas de un banco de compensación británico: flujos de pago y aprobación con PSD2, Next.js con un BFF propio, versiones semanales tras feature flags y un equipo de cinco ingenieros senior.',
@@ -162,7 +162,7 @@ const es = {
         note: '',
         period: '2014 – 2018',
         place: 'España',
-        role: '',
+        role: 'Full-Stack Developer · R&D Engineer',
         text: 'WebGIS de agricultura de precisión en Angular y Django, y sistemas de control telemático IoT en React y Java.',
         stack: ['Angular', 'Django', 'React', 'Java', 'IoT'],
       },
@@ -263,7 +263,7 @@ const en: Copy = {
   cvShort: 'CV',
   hero: {
     kicker: 'Senior Frontend Engineer · Tech Lead',
-    location: 'Valencia, Spain · Remote across Europe (CET)',
+    location: 'Valencia, Spain · EU citizen · Remote across Europe (CET)',
     title: 'I build and lead frontend for *regulated payments*.',
     intro:
       '10+ years with React and TypeScript, seven of them leading teams. Today I lead the frontend of a UK clearing bank’s business portal: PSD2 payment and approval flows, Next.js with its own BFF, weekly releases behind feature flags, and a team of five senior engineers.',
@@ -344,7 +344,7 @@ const en: Copy = {
         note: '',
         period: '2014 – 2018',
         place: 'Spain',
-        role: '',
+        role: 'Full-Stack Developer · R&D Engineer',
         text: 'Precision-agriculture WebGIS in Angular and Django, and IoT telematic control systems in React and Java.',
         stack: ['Angular', 'Django', 'React', 'Java', 'IoT'],
       },
