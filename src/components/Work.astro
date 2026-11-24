@@ -142,7 +142,7 @@ const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 
   .feat__tag { margin-top: 4px; font-size: 15px; font-weight: 550; color: var(--accent); }
   .feat__summary { margin-top: 12px; color: var(--fg-2); font-size: 15.5px; }
   .feat .chips { margin-top: 18px; }
-  .stats { margin-top: 18px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 1px solid var(--line); }
+  .stats { margin-top: 18px; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); border-block: 1px solid var(--line); }
   .stats div { padding: 12px 10px 12px 0; display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 2px; }
   .stats div + div { padding-left: 14px; border-left: 1px solid var(--line); }
   .stats dd { font-size: 22px; font-weight: 650; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }

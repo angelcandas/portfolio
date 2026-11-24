@@ -28,7 +28,7 @@ export interface Stat { value: string; label: string }
 const shared = {
   depthline: {
     year: '',
-    stack: ['Vite', 'WebSockets', 'Web Workers', 'SharedArrayBuffer', 'GPU rendering'],
+    stack: ['TypeScript', 'WebGPU', 'Vite', 'WebSockets', 'Web Workers', 'SharedArrayBuffer'],
     links: [{ label: 'Demo', href: 'https://orderbook.aiwilltrade.com' }],
   },
   cryptotax: {
@@ -197,7 +197,6 @@ const es = {
       stats: [
         { value: '2', label: 'exchanges en directo' },
         { value: '5 / s', label: 'comprobaciones de alertas de precio' },
-        { value: '~5 ms', label: 'mediana del mensaje al frame (escritorio)' },
       ] as Stat[],
     },
     cryptotax: {
@@ -396,7 +395,6 @@ const en: Copy = {
       stats: [
         { value: '2', label: 'live exchanges' },
         { value: '5 / s', label: 'price-alert checks' },
-        { value: '~5 ms', label: 'median message to frame (desktop)' },
       ] as Stat[],
     },
     cryptotax: {
