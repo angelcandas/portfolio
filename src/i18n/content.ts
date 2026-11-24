@@ -19,8 +19,8 @@ export const site = {
   timezone: 'Europe/Madrid',
 };
 
-export type ProjectId = 'cryptotax' | 'micfx' | 'quecomo' | 'carlog' | 'homelog' | 'llanes';
-export type SmallProjectId = 'quecomo' | 'carlog' | 'homelog' | 'llanes';
+export type ProjectId = 'cryptotax' | 'micfx' | 'aiwilltrade' | 'quecomo' | 'carlog' | 'homelog' | 'llanes';
+export type SmallProjectId = 'aiwilltrade' | 'quecomo' | 'carlog' | 'homelog' | 'llanes';
 
 export interface Link { label: string; href: string }
 export interface Stat { value: string; label: string }
@@ -35,6 +35,11 @@ const shared = {
     year: '2026',
     stack: ['C++20', 'JUCE', 'DSP', 'WebView UI', 'AU · VST3'],
     links: [{ label: 'GitHub', href: 'https://github.com/angelcandas/local-mic-effects' }],
+  },
+  aiwilltrade: {
+    year: '',
+    stack: ['React', 'AWS', 'Python ML'],
+    links: [] as Link[],
   },
   quecomo: {
     year: '2026',
@@ -172,7 +177,7 @@ const es = {
     label: 'Proyectos',
     title: 'Proyectos personales',
     lead: 'Productos completos que diseño, construyo y mantengo fuera del trabajo.',
-    more: 'Más apps propias',
+    more: 'Más proyectos',
     visit: 'Abrir',
     private: 'Código privado',
     signin: 'App (requiere iniciar sesión)',
@@ -196,6 +201,11 @@ const es = {
         { value: '24', label: 'presets de voz' },
         { value: '5 ms', label: 'ventana de detección de tono' },
       ] as Stat[],
+    },
+    aiwilltrade: {
+      name: 'AiWillTrade',
+      tag: 'Startup de trading algorítmico · cofundador',
+      summary: 'Construí el dashboard en React y la infraestructura en AWS para gestionar carteras a partir de predictores de machine learning en Python.',
     },
     quecomo: {
       name: '¿Qué como?',
@@ -226,7 +236,7 @@ const es = {
       'En el trabajo usamos GitHub Copilot con modelos de Claude y OpenAI, y en mis proyectos uso Claude Code.',
     ],
     details: [
-      { k: 'Formación', v: ['Ingeniería de Telecomunicación, Universidad de Oviedo', 'Máster en Mecatrónica, Universitat Politècnica de València'] },
+      { k: 'Formación', v: ['Ingeniería de Telecomunicación, Universidad de Oviedo', 'Máster en Mecatrónica, Universitat Politècnica de València', 'MBA, The Power MBA (2020–2021)'] },
       { k: 'Idiomas', v: ['Español', 'Inglés', 'Italiano'] },
       { k: 'Ubicación', v: ['Valencia, España (CET)', 'Remoto en Europa'] },
     ],
@@ -354,7 +364,7 @@ const en: Copy = {
     label: 'Projects',
     title: 'Side projects',
     lead: 'Complete products I design, build and run outside work.',
-    more: 'More of my apps',
+    more: 'More projects',
     visit: 'Open',
     private: 'Private source',
     signin: 'App (sign-in required)',
@@ -378,6 +388,11 @@ const en: Copy = {
         { value: '24', label: 'voice presets' },
         { value: '5 ms', label: 'pitch detection window' },
       ] as Stat[],
+    },
+    aiwilltrade: {
+      name: 'AiWillTrade',
+      tag: 'Algorithmic trading startup · co-founder',
+      summary: 'Built the React dashboard and the AWS infrastructure for portfolio management driven by Python machine-learning predictors.',
     },
     quecomo: {
       name: '¿Qué como?',
@@ -408,7 +423,7 @@ const en: Copy = {
       'At work we use GitHub Copilot with Claude and OpenAI models, and I build my own projects with Claude Code.',
     ],
     details: [
-      { k: 'Education', v: ['Telecommunications Engineering, University of Oviedo', 'MSc Mechatronics, Universitat Politècnica de València'] },
+      { k: 'Education', v: ['Telecommunications Engineering, University of Oviedo', 'MSc Mechatronics, Universitat Politècnica de València', 'MBA, The Power MBA (2020–2021)'] },
       { k: 'Languages', v: ['Spanish', 'English', 'Italian'] },
       { k: 'Location', v: ['Valencia, Spain (CET)', 'Remote across Europe'] },
     ],
@@ -431,7 +446,7 @@ const en: Copy = {
 };
 
 export const copy: Record<Lang, Copy> = { es, en };
-export const smallProjects: SmallProjectId[] = ['quecomo', 'carlog', 'homelog', 'llanes'];
+export const smallProjects: SmallProjectId[] = ['aiwilltrade', 'quecomo', 'carlog', 'homelog', 'llanes'];
 // Apps that show a sign-in screen to a visitor who is not logged in.
 export const signInRequired: SmallProjectId[] = ['quecomo', 'carlog', 'homelog'];
 export { shared as projectMeta };

@@ -71,13 +71,13 @@ const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 
               <p class="mini__tag">{p.tag}</p>
               <p class="mini__summary">{p.summary}</p>
               <ul role="list" class="chips">{m.stack.map((s) => <li>{s}</li>)}</ul>
-              <div class="links">
+              {m.links.length > 0 && <div class="links">
                 {m.links.map((l) => (
                   <a class="link" href={l.href} target="_blank" rel="noopener">
                     {l.label === 'App' && signInRequired.includes(id) ? t.work.signin : l.label}<span class="sr-only"> · {p.name}</span><Fragment set:html={arrow} />
                   </a>
                 ))}
-              </div>
+              </div>}
             </article>
           </li>
         );
@@ -114,9 +114,8 @@ const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 
   .links { display: flex; flex-wrap: wrap; gap: 0 20px; margin-top: auto; padding-top: 12px; }
 
   .more__label { margin-top: clamp(48px, 5vw, 72px); margin-bottom: 16px; }
-  .more { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); }
-  .mini { padding: 22px 20px 8px 0; }
-  .mini + .mini { padding-left: 20px; border-left: 1px solid var(--line); }
+  .more { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); column-gap: 40px; }
+  .mini { padding: 22px 0 8px; border-top: 1px solid var(--line); }
   .mini article { height: 100%; display: flex; flex-direction: column; }
   .mini__name { font-size: 18px; letter-spacing: -0.018em; }
   .mini__tag { margin-top: 2px; font-size: 13.5px; color: var(--muted); }
@@ -125,14 +124,8 @@ const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 
 
   @media (max-width: 960px) {
     .feats { grid-template-columns: 1fr; }
-    .more { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .mini:nth-child(3) { padding-left: 0; border-left: 0; }
-    .mini:nth-child(n + 3) { border-top: 1px solid var(--line); }
   }
   @media (max-width: 560px) {
-    .more { grid-template-columns: 1fr; }
-    .mini, .mini + .mini { padding-left: 0; border-left: 0; }
-    .mini + .mini { border-top: 1px solid var(--line); }
     .feat__media { aspect-ratio: auto; }
   }
 </style>
