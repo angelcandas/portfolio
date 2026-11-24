@@ -1,136 +1,142 @@
 ---
-import { copy, site, type Lang } from '../i18n/content';
+import { copy, site, perf, type Lang } from '../i18n/content';
+import { hasCv } from '../lib/cv';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const all = copy[lang];
 const t = all.hero;
-const longest = Math.max(...t.lines.map((l) => l.replace(/\*/g, '').length));
+const r = all.release;
 const fmt = (s: string) => s.replace(/\*(.+?)\*/g, '<em>$1</em>');
+const dash = perf[0];
+const icon = {
+  mail: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3.5h12v9H2zM2.5 4l5.5 4.5L13.5 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>',
+  dl: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8.5M4.5 7 8 10.5 11.5 7M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  out: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+};
 ---
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero__inner wrap">
-    <div class="hero__top">
-      <p class="hero__who hero__fade" style="--i:0"><span class="hero__name">{site.name}</span><span class="label">{t.kicker}</span></p>
-      <p class="hero__status hero__fade" style="--i:1"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s-4.5-4.2-4.5-7.6a4.5 4.5 0 0 1 9 0c0 3.4-4.5 7.6-4.5 7.6z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="6.9" r="1.6" fill="currentColor"/></svg>{t.location}</p>
-    </div>
-
-    <h1 id="hero-title" class="hero__title" style={`--chars:${longest}`}>
-      <span class="sr-only">{site.name}. </span>
-      {t.lines.map((line, i) => (
-        <span class="line"><span class="line__in" style={`--i:${i}`} set:html={fmt(line)} /></span>
-      ))}
-    </h1>
-
-    <canvas class="hero__scope" data-scope aria-hidden="true"></canvas>
-
-    <div class="hero__bottom">
-      <p class="hero__intro hero__fade" style="--i:4">{t.intro}</p>
-      <div class="hero__actions hero__fade" style="--i:5">
-        <a href={site.cv} class="btn btn--solid" download data-magnetic>
-          {all.cv}
-          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v9M4 7.5 8 11.5l4-4M3 14h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a href="#experience" class="btn" data-magnetic>{t.experience}<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v12M3 9l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href={site.linkedin} class="btn" data-magnetic rel="me noopener" target="_blank">LinkedIn<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href={site.github} class="btn" data-magnetic rel="me noopener" target="_blank">GitHub<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <div class="hero__main">
+      <p class="hero__who">
+        <span class="hero__role">{t.kicker}</span>
+        <span class="hero__loc"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s-4.5-4.2-4.5-7.6a4.5 4.5 0 0 1 9 0c0 3.4-4.5 7.6-4.5 7.6z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="6.9" r="1.6" fill="currentColor"/></svg>{t.location}</span>
+      </p>
+      <h1 id="hero-title" class="hero__title"><span class="sr-only">{site.name}. </span><Fragment set:html={fmt(t.title)} /></h1>
+      <p class="hero__intro">{t.intro}</p>
+      <div class="hero__actions">
+        {site.email[lang] && <a href={`mailto:${site.email[lang]}`} class="btn btn--primary"><Fragment set:html={icon.mail} />{t.email}</a>}
+        {hasCv && <a href={site.cv} class="btn" download><Fragment set:html={icon.dl} />{all.cv}</a>}
+        <a href={site.linkedin} class="btn" rel="me noopener" target="_blank">LinkedIn<Fragment set:html={icon.out} /></a>
+        <a href={site.github} class="btn" rel="me noopener" target="_blank">GitHub<Fragment set:html={icon.out} /></a>
       </div>
     </div>
 
-    <div class="hero__meta hero__fade" style="--i:6" aria-hidden="true">
-      <span>{site.domain}</span>
-      <span class="hero__scroll">{t.scroll}<i></i></span>
-      <span>React · TypeScript · Next.js</span>
+    <aside class="release card" aria-labelledby="release-title">
+      <div class="release__head">
+        <div>
+          <p class="eyebrow">{r.label}</p>
+          <h2 id="release-title" class="release__title">{r.title}</h2>
+        </div>
+        <span class="release__badge"><i aria-hidden="true"></i>{r.badge}</span>
+      </div>
+      <ol role="list" class="release__steps">
+        {r.steps.map((s) => (
+          <li>
+            <span class="release__dot" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 8.3 6.8 11 12 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="release__k">{s.k}</span>
+            <span class="release__v">{s.v}</span>
+          </li>
+        ))}
+      </ol>
+      <p class="release__foot">
+        <span>{r.foot}</span>
+        <span class="release__delta"><s aria-hidden="true">{dash.before}</s><span class="sr-only">{dash.before} → </span><b>{dash.after}</b><span class="release__up" aria-hidden="true">+{dash.after - dash.before}</span></span>
+      </p>
+    </aside>
+  </div>
+
+  <div class="wrap">
+    <dl class="facts">
+      {t.facts.map((f) => (
+        <div class="fact"><dt>{f.label}</dt><dd>{f.value}</dd></div>
+      ))}
+    </dl>
+    <div class="clients">
+      <p class="eyebrow">{t.clientsLabel}</p>
+      <ul role="list">{t.clients.map((c) => <li>{c}</li>)}</ul>
     </div>
   </div>
 </section>
 
 <style>
-  .hero {
-    position: relative;
-    min-height: 100svh;
-    display: flex;
-    padding-top: 96px;
-    padding-bottom: 28px;
-    isolation: isolate;
-    overflow: clip;
-  }
+  .hero { padding-top: clamp(40px, 7vw, 96px); padding-bottom: clamp(48px, 6vw, 80px); position: relative; isolation: isolate; }
   .hero::before {
-    content: ''; position: absolute; inset: 0; z-index: -2;
-    background:
-      radial-gradient(60% 50% at 80% 10%, rgb(124 107 255 / 0.16), transparent 70%),
-      radial-gradient(50% 40% at 10% 90%, rgb(200 255 61 / 0.08), transparent 70%);
+    content: ''; position: absolute; inset: -64px 0 0; z-index: -1;
+    background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(70% 60% at 70% 20%, #000 0%, transparent 75%);
+    opacity: 0.6;
   }
-  .hero__scope {
-    position: relative; z-index: -1; display: block; max-width: none;
-    width: calc(100% + 2 * var(--gutter)); height: clamp(110px, 17vh, 190px);
-    margin: -24px calc(-1 * var(--gutter));
-  }
-  .hero__inner { display: flex; flex-direction: column; justify-content: space-between; gap: 40px; }
-  .hero__top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
-  .hero__status {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-size: 13px; color: var(--fg-2);
-    border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px 6px 10px;
-    background: rgb(255 255 255 / 0.03);
-  }
-  .hero__who { display: grid; gap: 10px; }
-  .hero__name { font-family: var(--f-display); font-size: clamp(22px, 2vw, 30px); font-weight: 600; letter-spacing: -0.03em; }
-  .hero__status svg { width: 15px; height: 15px; color: var(--accent); flex: none; }
+  .hero__inner { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
+
+  .hero__who { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
+  .hero__role { font-family: var(--f-mono); font-size: 13px; font-weight: 500; letter-spacing: 0.04em; color: var(--accent); padding: 5px 10px; border-radius: 6px; background: var(--accent-soft); }
+  .hero__loc { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); }
+  .hero__loc svg { width: 14px; height: 14px; }
 
   .hero__title {
-    /* Fit the longest line on one row: about 0.44em per character, plus the 0.9em indent. */
-    font-size: min(120px, 7vw, calc((100vw - 2 * var(--gutter)) / (var(--chars) * 0.44 + 0.9)));
-    font-weight: 500;
-    line-height: 0.94;
-    letter-spacing: -0.055em;
-    font-variation-settings: 'wdth' 82;
-    text-wrap: initial;
+    margin-top: 24px;
+    font-size: clamp(38px, 5.2vw, 68px);
+    font-weight: 650;
+    line-height: 1.04;
+    letter-spacing: -0.038em;
+    max-width: 14ch;
   }
-  .line { display: block; overflow: clip; padding-bottom: 0.06em; margin-bottom: -0.06em; white-space: nowrap; }
-  .line__in {
-    display: inline-block;
-    animation: rise 1.4s var(--ease-out) both;
-    animation-delay: calc(0.15s + var(--i) * 0.11s);
-  }
-  .line:nth-child(3) .line__in { padding-left: 0.9em; }
-  .line:nth-child(4) .line__in { padding-left: 1.8em; }
-  .hero__title :global(em) {
-    font-style: normal;
-    color: var(--accent);
-    font-variation-settings: 'wdth' 100;
-    font-weight: 700;
-  }
-  @keyframes rise { from { transform: translateY(105%) rotate(2deg); } to { transform: none; } }
+  .hero__title :global(em) { font-style: normal; color: var(--accent); }
+  .hero__intro { margin-top: 24px; font-size: clamp(17px, 1.4vw, 19px); line-height: 1.6; color: var(--fg-2); max-width: 58ch; }
+  .hero__actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 10px; }
 
-  .hero__fade { animation: fade 1.2s var(--ease-out) both; animation-delay: calc(0.3s + var(--i) * 0.1s); }
-  @keyframes fade { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  /* Release card */
+  .release { padding: 22px; }
+  .release__head { display: flex; justify-content: space-between; align-items: start; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+  .release__title { margin-top: 6px; font-size: 18px; letter-spacing: -0.015em; }
+  .release__badge { display: inline-flex; align-items: center; gap: 6px; font-family: var(--f-mono); font-size: 12px; color: var(--accent); padding: 4px 9px; border-radius: 999px; background: var(--accent-soft); white-space: nowrap; }
+  .release__badge i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .release__steps { padding-block: 8px; }
+  .release__steps li { display: grid; grid-template-columns: 22px minmax(0, 1fr); column-gap: 12px; padding-block: 9px; position: relative; }
+  .release__steps li:not(:last-child)::after { content: ''; position: absolute; left: 10.5px; top: 33px; bottom: -7px; width: 1px; background: var(--line-2); }
+  .release__dot { grid-row: span 2; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+  .release__dot svg { width: 14px; height: 14px; }
+  .release__k { font-size: 14.5px; font-weight: 550; }
+  .release__v { font-size: 13px; color: var(--muted); }
+  .release__foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--fg-2); }
+  .release__delta { display: inline-flex; align-items: baseline; gap: 8px; font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+  .release__delta s { color: var(--muted); font-size: 13px; }
+  .release__delta b { font-size: 20px; font-weight: 600; color: var(--fg); }
+  .release__up { font-size: 12px; color: var(--accent); }
 
-  .hero__bottom { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 32px; align-items: end; }
-  .hero__intro { max-width: 40ch; font-size: clamp(17px, 1.3vw, 21px); color: var(--fg-2); line-height: 1.5; }
-  .hero__actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  /* Facts */
+  .facts { margin-top: clamp(48px, 6vw, 80px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 1px solid var(--line); }
+  .fact { padding: 22px 20px 22px 0; display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 4px; }
+  .fact + .fact { padding-left: 20px; border-left: 1px solid var(--line); }
+  .fact dd { font-size: clamp(28px, 2.8vw, 38px); font-weight: 650; letter-spacing: -0.035em; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .fact dt { font-size: 14px; color: var(--muted); line-height: 1.4; }
 
-  .hero__meta {
-    display: flex; justify-content: space-between; align-items: center; gap: 16px;
-    padding-top: 20px; border-top: 1px solid var(--line);
-    font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+  .clients { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 24px; }
+  .clients ul { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+  .clients li { font-size: 15px; font-weight: 600; color: var(--fg-2); letter-spacing: -0.01em; }
+
+  @media (max-width: 960px) {
+    .hero__inner { grid-template-columns: 1fr; }
+    .hero__title { max-width: 18ch; }
+    .release { max-width: 560px; }
   }
-  .hero__scroll { display: inline-flex; align-items: center; gap: 10px; }
-  .hero__scroll i { width: 1px; height: 22px; background: var(--line-2); position: relative; overflow: hidden; }
-  .hero__scroll i::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 40%; background: var(--accent); animation: drip 1.8s var(--ease-in-out) infinite; }
-  @keyframes drip { from { transform: translateY(-100%); } to { transform: translateY(260%); } }
-
-  @media (max-width: 860px) {
-    .hero__bottom { grid-template-columns: 1fr; }
-    .hero__scope { height: clamp(110px, 26vw, 200px); margin: -12px calc(-1 * var(--gutter)); }
-    .hero__inner { gap: 28px; }
-    .line:nth-child(3) .line__in, .line:nth-child(4) .line__in { padding-left: 0; }
-  }
-  @media (max-width: 560px) {
+  @media (max-width: 640px) {
+    .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .fact:nth-child(3) { padding-left: 0; border-left: 0; }
+    .fact:nth-child(n + 3) { border-top: 1px solid var(--line); }
     .hero__actions { display: grid; grid-template-columns: 1fr 1fr; }
-    .hero__actions .btn { justify-content: center; padding-inline: 12px; }
-    .hero__name { font-size: 22px; }
-    .hero__title { font-size: min(40px, calc((100vw - 2 * var(--gutter)) / (var(--chars) * 0.45))); }
-    .hero__meta span:first-child, .hero__meta span:last-child { display: none; }
-    .hero__meta { justify-content: center; }
+    .hero__actions .btn:first-child { grid-column: 1 / -1; }
+    .clients { display: grid; gap: 10px; }
   }
 </style>

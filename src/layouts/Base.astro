@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { copy, site, type Lang } from '../i18n/content';
+import interLatin from '@fontsource-variable/inter/files/inter-latin-opsz-normal.woff2?url';
 
 interface Props { lang: Lang; title?: string; description?: string; noindex?: boolean }
 const { lang, title, description, noindex = false } = Astro.props;
@@ -15,7 +16,7 @@ const jsonLd = {
   name: site.fullName,
   alternateName: site.name,
   url: site.url,
-  jobTitle: 'Frontend & Product Engineer',
+  jobTitle: 'Senior Frontend Engineer, Technical Lead',
   address: { '@type': 'PostalAddress', addressLocality: 'Valencia', addressCountry: 'ES' },
   alumniOf: ['Universitat Politècnica de València', 'Universidad de Oviedo'],
   knowsLanguage: ['es', 'en', 'it'],
@@ -34,8 +35,10 @@ const jsonLd = {
     <link rel="alternate" hreflang="es" href={new URL('/es/', site.url).href} />
     <link rel="alternate" hreflang="x-default" href={new URL('/', site.url).href} />
     {noindex && <meta name="robots" content="noindex" />}
-    <meta name="theme-color" content="#09090b" />
-    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#f7f7f5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0b0d" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="preload" href={interLatin} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta property="og:type" content="website" />
@@ -54,6 +57,5 @@ const jsonLd = {
   <body>
     <a class="skip" href="#main">{t.skip}</a>
     <slot />
-    <div class="grain" aria-hidden="true"></div>
   </body>
 </html>

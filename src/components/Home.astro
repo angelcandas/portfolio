@@ -2,7 +2,6 @@
 import Base from '../layouts/Base.astro';
 import Nav from './Nav.astro';
 import Hero from './Hero.astro';
-import Marquee from './Marquee.astro';
 import Work from './Work.astro';
 import Experience from './Experience.astro';
 import About from './About.astro';
@@ -16,7 +15,6 @@ const { lang } = Astro.props;
   <main id="main" tabindex="-1">
     <span id="top"></span>
     <Hero lang={lang} />
-    <Marquee lang={lang} />
     <Experience lang={lang} />
     <Work lang={lang} />
     <About lang={lang} />

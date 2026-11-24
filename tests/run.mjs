@@ -35,10 +35,11 @@ const fail = (msg) => { failures.push(msg); console.log('  ✗ ' + msg); };
 const browser = await chromium.launch();
 for (const motion of ['no-preference', 'reduce']) {
   for (const vp of viewports) {
-    const ctx = await browser.newContext({ viewport: vp, deviceScaleFactor: 1, reducedMotion: motion });
+    // Reduced-motion runs also cover the dark colour scheme.
+    const ctx = await browser.newContext({ viewport: vp, deviceScaleFactor: 1, reducedMotion: motion, colorScheme: motion === 'reduce' ? 'dark' : 'light' });
     for (const p of pages) {
       const page = await ctx.newPage();
-      const tag = `${p} @${vp.name}${motion === 'reduce' ? ' (reduced motion)' : ''}`;
+      const tag = `${p} @${vp.name}${motion === 'reduce' ? ' (reduced motion, dark)' : ''}`;
       page.on('console', (m) => { if (m.type() === 'error') fail(`${tag}: console error: ${m.text()}`); });
       page.on('pageerror', (e) => fail(`${tag}: page error: ${e.message}`));
       page.on('requestfailed', (r) => fail(`${tag}: request failed: ${r.url()}`));
