@@ -19,17 +19,22 @@ export const site = {
   timezone: 'Europe/Madrid',
 };
 
-export type ProjectId = 'cryptotax' | 'micfx' | 'aiwilltrade' | 'quecomo' | 'carlog' | 'homelog' | 'llanes';
+export type ProjectId = 'depthline' | 'cryptotax' | 'micfx' | 'aiwilltrade' | 'quecomo' | 'carlog' | 'homelog' | 'llanes';
 export type SmallProjectId = 'aiwilltrade' | 'quecomo' | 'carlog' | 'homelog' | 'llanes';
 
 export interface Link { label: string; href: string }
 export interface Stat { value: string; label: string }
 
 const shared = {
+  depthline: {
+    year: '',
+    stack: ['Vite', 'WebSockets', 'Web Workers', 'SharedArrayBuffer', 'GPU rendering'],
+    links: [{ label: 'Demo', href: 'https://orderbook.aiwilltrade.com' }],
+  },
   cryptotax: {
     year: '2026',
     stack: ['React 18', 'Vite', 'TypeScript', 'Node · Express', 'Prisma'],
-    links: [] as Link[],
+    links: [{ label: 'App', href: 'https://crypto-tax.aiwilltrade.com' }],
   },
   micfx: {
     year: '2026',
@@ -180,9 +185,21 @@ const es = {
     more: 'Más proyectos',
     visit: 'Abrir',
     private: 'Código privado',
+    live: 'Demo en vivo',
     signin: 'App (requiere iniciar sesión)',
   },
   projects: {
+    depthline: {
+      name: 'Depthline',
+      tag: 'Libro de órdenes en tiempo real para Kraken y Binance',
+      summary:
+        'Recibe en directo los libros de órdenes de Kraken y Binance, valida cada actualización con checksums y control de secuencia, y dibuja profundidad, velas y un mapa de liquidaciones en pocos milisegundos desde que llega el mensaje. El parseo y la detección de patrones corren en workers sobre memoria compartida.',
+      stats: [
+        { value: '2', label: 'exchanges en directo' },
+        { value: '5 / s', label: 'comprobaciones de alertas de precio' },
+        { value: '~5 ms', label: 'mediana del mensaje al frame (escritorio)' },
+      ] as Stat[],
+    },
     cryptotax: {
       name: 'Crypto Tax ES',
       tag: 'Gestor fiscal para inversores en cripto en España',
@@ -367,9 +384,21 @@ const en: Copy = {
     more: 'More projects',
     visit: 'Open',
     private: 'Private source',
+    live: 'Live demo',
     signin: 'App (sign-in required)',
   },
   projects: {
+    depthline: {
+      name: 'Depthline',
+      tag: 'Real-time order book for Kraken and Binance',
+      summary:
+        'Streams live order books from Kraken and Binance, checks every update with checksums and sequence numbers, and draws depth, candles and a liquidation heatmap within milliseconds of each message. Parsing and pattern detection run in workers over shared memory.',
+      stats: [
+        { value: '2', label: 'live exchanges' },
+        { value: '5 / s', label: 'price-alert checks' },
+        { value: '~5 ms', label: 'median message to frame (desktop)' },
+      ] as Stat[],
+    },
     cryptotax: {
       name: 'Crypto Tax ES',
       tag: 'Tax manager for Spanish crypto investors',

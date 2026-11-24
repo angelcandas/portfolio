@@ -2,6 +2,7 @@
 import { Picture } from 'astro:assets';
 import { copy, projectMeta, smallProjects, signInRequired, type Lang } from '../i18n/content';
 import micfxMixer from '../assets/projects/micfx-mixer.png';
+import depthlineShot from '../assets/projects/depthline.png';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -9,6 +10,7 @@ const t = copy[lang];
 const isEs = lang === 'es';
 const ct = t.projects.cryptotax;
 const mf = t.projects.micfx;
+const dl = t.projects.depthline;
 const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 ---
 <section id="work" class="section work" aria-labelledby="work-title">
@@ -20,6 +22,28 @@ const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 
     </div>
 
     <div class="feats">
+      <!-- Depthline: live order book, the most relevant piece for trading and exchange teams -->
+      <article class="feat feat--wide card" aria-labelledby="p-depthline" data-reveal>
+        <figure class="feat__media feat__media--shot feat__media--dark">
+          <Picture src={depthlineShot} formats={['avif', 'webp']} widths={[800]} sizes="(max-width: 960px) 100vw, 720px" alt={isEs ? 'Depthline con el libro de órdenes BTC/USD de Kraken en directo: niveles de compra y venta, gráfico de profundidad, velas con patrones detectados y métricas de integridad y rendimiento del feed.' : 'Depthline showing the live Kraken BTC/USD order book: bid and ask levels, a depth chart, candles with detected patterns, and feed integrity and performance metrics.'} />
+        </figure>
+        <div class="feat__body">
+          <p class="feat__meta"><span class="live"><i aria-hidden="true"></i>{t.work.live}</span></p>
+          <h3 id="p-depthline" class="feat__name">{dl.name}</h3>
+          <p class="feat__tag">{dl.tag}</p>
+          <p class="feat__summary">{dl.summary}</p>
+          <dl class="stats">
+            {dl.stats.map((s) => <div><dt>{s.label}</dt><dd>{s.value}</dd></div>)}
+          </dl>
+          <ul role="list" class="chips">{projectMeta.depthline.stack.map((s) => <li>{s}</li>)}</ul>
+          <div class="links">
+            {projectMeta.depthline.links.map((l) => (
+              <a class="link" href={l.href} target="_blank" rel="noopener">{t.work.live}<span class="sr-only"> · {dl.name}</span><Fragment set:html={arrow} /></a>
+            ))}
+          </div>
+        </div>
+      </article>
+
       <!-- Crypto Tax ES: the fintech project. Private source, so it is shown as its data flow. -->
       <article class="feat card" aria-labelledby="p-cryptotax" data-reveal>
         <div class="feat__media feat__media--flow">
@@ -34,6 +58,11 @@ const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 
           <p class="feat__tag">{ct.tag}</p>
           <p class="feat__summary">{ct.summary}</p>
           <ul role="list" class="chips">{projectMeta.cryptotax.stack.map((s) => <li>{s}</li>)}</ul>
+          <div class="links">
+            {projectMeta.cryptotax.links.map((l) => (
+              <a class="link" href={l.href} target="_blank" rel="noopener">{l.label}<span class="sr-only"> · {ct.name}</span><Fragment set:html={arrow} /></a>
+            ))}
+          </div>
         </div>
       </article>
 
@@ -89,6 +118,13 @@ const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 
 <style>
   .feats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
   .feat { overflow: hidden; display: flex; flex-direction: column; }
+  .feat--wide { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+  .feat--wide .feat__media { aspect-ratio: auto; border-bottom: 0; border-right: 1px solid var(--line); }
+  .feat .feat__media--dark { background: #0b0d10; }
+  .feat--wide .feat__media--shot { place-items: center; padding: clamp(16px, 2.4vw, 32px); }
+  .feat--wide .feat__media--shot :global(img) { border-radius: 8px; }
+  .live { display: inline-flex; align-items: center; gap: 6px; color: var(--accent); }
+  .live i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 3px var(--accent-soft); }
   .feat__media { border-bottom: 1px solid var(--line); background: var(--surface-2); aspect-ratio: 16 / 10; }
   .feat__media--shot { overflow: hidden; display: grid; place-items: end center; padding: 24px 24px 0; }
   .feat__media--shot :global(picture), .feat__media--shot :global(img) { width: 100%; border-radius: 8px 8px 0 0; box-shadow: 0 0 0 1px var(--line), 0 12px 32px -12px rgb(0 0 0 / 0.35); }
@@ -124,6 +160,8 @@ const arrow = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 
 
   @media (max-width: 960px) {
     .feats { grid-template-columns: 1fr; }
+    .feat--wide { grid-template-columns: 1fr; }
+    .feat--wide .feat__media { border-right: 0; border-bottom: 1px solid var(--line); }
   }
   @media (max-width: 560px) {
     .feat__media { aspect-ratio: auto; }
