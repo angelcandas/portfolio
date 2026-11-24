@@ -4,14 +4,14 @@ interface Props { lang: Lang }
 const t = copy[Astro.props.lang].experience;
 const c = t.case;
 ---
-<section id="experience" class="section exp" aria-labelledby="exp-title">
+<section id="experience" class="section section--alt exp" aria-labelledby="exp-title">
   <div class="wrap">
     <div class="section-head">
       <p class="eyebrow">{t.label}</p>
       <h2 id="exp-title">{t.title}</h2>
     </div>
 
-    <article class="case card" aria-labelledby="case-title">
+    <article class="case card" data-reveal aria-labelledby="case-title">
       <div class="case__main">
         <p class="case__eyebrow">{c.eyebrow}</p>
         <h3 id="case-title" class="case__title">{c.title}</h3>
@@ -29,7 +29,7 @@ const c = t.case;
           {c.meta.map((m) => <div><dt>{m.k}</dt><dd>{m.v}</dd></div>)}
         </dl>
 
-        <figure class="perf" data-reveal>
+        <figure class="perf">
           <figcaption>
             <span class="perf__title">{c.perfLabel}</span>
             <span class="perf__legend" aria-hidden="true">
@@ -75,20 +75,20 @@ const c = t.case;
 <style>
   .case { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 0; overflow: hidden; }
   .case__main { padding: clamp(24px, 3.4vw, 44px); }
-  .case__side { padding: clamp(24px, 3.4vw, 44px); background: var(--surface-2); border-left: 1px solid var(--line); display: grid; gap: 28px; align-content: start; }
-  .case__eyebrow { font-family: var(--f-mono); font-size: 12.5px; letter-spacing: 0.04em; color: var(--accent); }
-  .case__title { margin-top: 12px; font-size: clamp(24px, 2.4vw, 32px); letter-spacing: -0.028em; }
-  .case__summary { margin-top: 16px; font-size: 17px; color: var(--fg-2); max-width: 62ch; }
+  .case__side { padding: clamp(24px, 3.4vw, 44px); background: color-mix(in srgb, var(--fg) 3.5%, var(--card)); display: grid; gap: 28px; align-content: start; }
+  .case__eyebrow { font-size: 15px; font-weight: 600; color: var(--accent); }
+  .case__title { margin-top: 10px; font-size: clamp(28px, 3vw, 40px); font-weight: 700; letter-spacing: -0.035em; }
+  .case__summary { margin-top: 16px; font-size: 19px; line-height: 1.45; color: var(--muted); font-weight: 500; max-width: 62ch; }
   .case__sub { margin-top: 32px; }
   .case__bullets { margin-top: 14px; display: grid; gap: 10px; }
-  .case__bullets li { position: relative; padding-left: 22px; color: var(--fg-2); font-size: 15.5px; line-height: 1.55; max-width: 64ch; }
-  .case__bullets li::before { content: ''; position: absolute; left: 2px; top: 0.55em; width: 8px; height: 8px; border-radius: 2px; background: var(--accent); opacity: 0.9; }
+  .case__bullets li { position: relative; padding-left: 22px; color: var(--fg-2); font-size: 17px; line-height: 1.55; max-width: 64ch; }
+  .case__bullets li::before { content: ''; position: absolute; left: 2px; top: 0.55em; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); opacity: 0.9; }
   .case__stack { margin-top: 28px; }
 
-  .meta { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
-  .meta div { background: var(--surface); padding: 14px 16px; display: grid; gap: 2px; }
-  .meta dt { font-family: var(--f-mono); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
-  .meta dd { font-size: 15px; font-weight: 600; }
+  .meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .meta div { background: var(--surface); border-radius: 14px; padding: 14px 16px; display: grid; gap: 2px; }
+  .meta dt { font-size: 13px; color: var(--muted); }
+  .meta dd { font-size: 16px; font-weight: 600; }
 
   /* Lighthouse chart: a real table, drawn as paired bars */
   .perf { display: grid; gap: 14px; }
@@ -98,31 +98,31 @@ const c = t.case;
   .perf__legend span { display: inline-flex; align-items: center; gap: 6px; }
   .sw { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
   .sw--before, .bar--before { background: var(--mark-before); }
-  .sw--after, .bar--after { background: var(--accent); }
+  .sw--after, .bar--after { background: linear-gradient(90deg, var(--grad-a), var(--grad-b)); }
   .perf__table { width: 100%; border-collapse: collapse; }
-  .perf__row { display: grid; grid-template-columns: 1fr; gap: 4px; padding: 10px 8px; margin-inline: -8px; border-radius: 8px; transition: background-color 0.15s; }
+  .perf__row { display: grid; grid-template-columns: 1fr; gap: 4px; padding: 10px 10px; margin-inline: -10px; border-radius: 12px; transition: background-color 0.15s; }
   .perf__row:hover { background: var(--surface); }
   .perf__row th { text-align: left; font-size: 13.5px; font-weight: 550; display: flex; justify-content: space-between; margin-bottom: 4px; }
-  .perf__gain { font-family: var(--f-mono); font-size: 12px; color: var(--accent); font-weight: 500; }
+  .perf__gain { font-size: 13px; color: var(--accent); font-weight: 600; }
   .perf__row td { display: grid; grid-template-columns: minmax(0, 1fr) 28px; align-items: center; gap: 10px; }
-  .bar { height: 10px; width: calc(var(--v) * 1%); border-radius: 0 4px 4px 0; }
-  .val { font-family: var(--f-mono); font-size: 12.5px; color: var(--fg-2); font-variant-numeric: tabular-nums; text-align: right; }
+  .bar { height: 8px; width: calc(var(--v) * 1%); border-radius: 999px; }
+  .val { font-size: 12.5px; color: var(--fg-2); font-variant-numeric: tabular-nums; text-align: right; }
   .perf__note { font-size: 12.5px; color: var(--muted); }
 
-  .rows__label { margin-top: clamp(56px, 6vw, 80px); margin-bottom: 8px; }
-  .row { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: 8px 32px; padding: 28px 0; border-bottom: 1px solid var(--line); }
+  .rows__label { margin-top: clamp(72px, 8vw, 112px); margin-bottom: 8px; font-size: clamp(28px, 3vw, 40px); font-weight: 700; letter-spacing: -0.035em; color: var(--fg); }
+  .row { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: 8px 32px; padding: 36px 0; border-bottom: 1px solid var(--line); }
   .row:first-child { border-top: 1px solid var(--line); }
-  .row__period { font-family: var(--f-mono); font-size: 13px; color: var(--fg-2); display: grid; gap: 4px; align-content: start; padding-top: 4px; font-variant-numeric: tabular-nums; }
+  .row__period { font-size: 15px; font-weight: 500; color: var(--fg-2); display: grid; gap: 4px; align-content: start; padding-top: 4px; font-variant-numeric: tabular-nums; }
   .row__period span { color: var(--muted); }
-  .row__org { font-size: 21px; letter-spacing: -0.02em; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+  .row__org { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
   .row__note { font-size: 13.5px; font-weight: 400; letter-spacing: 0; color: var(--muted); }
   .row__role { margin-top: 4px; font-size: 15px; font-weight: 550; color: var(--accent); }
-  .row__text { margin-top: 10px; color: var(--fg-2); font-size: 15.5px; max-width: 74ch; }
+  .row__text { margin-top: 10px; color: var(--fg-2); font-size: 17px; max-width: 74ch; }
   .row .chips { margin-top: 14px; }
 
   @media (max-width: 960px) {
     .case { grid-template-columns: 1fr; }
-    .case__side { border-left: 0; border-top: 1px solid var(--line); }
+    .case__side { border-left: 0; }
   }
   @media (max-width: 640px) {
     .row { grid-template-columns: 1fr; padding: 24px 0; }

@@ -3,7 +3,7 @@ import { copy, type Lang } from '../i18n/content';
 interface Props { lang: Lang }
 const t = copy[Astro.props.lang].about;
 ---
-<section id="about" class="section about" aria-labelledby="about-title">
+<section id="about" class="section section--alt about" aria-labelledby="about-title">
   <div class="wrap">
     <div class="about__intro">
       <div class="section-head">
@@ -32,18 +32,18 @@ const t = copy[Astro.props.lang].about;
 
 <style>
   .about__intro { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
-  .about .section-head { margin-bottom: 0; }
-  .about .lead { font-size: 17px; }
-  .details { padding: 6px 22px; }
+  .about .section-head { margin: 0; justify-items: start; text-align: left; }
+  .about .lead { font-size: 19px; }
+  .details { padding: 8px 28px; }
   .details div { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 12px; padding-block: 14px; }
   .details div + div { border-top: 1px solid var(--line); }
-  .details dt { font-family: var(--f-mono); font-size: 11.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
-  .details dd { display: grid; gap: 2px; font-size: 15px; }
-  .caps__label { margin-top: clamp(48px, 5vw, 72px); margin-bottom: 16px; }
-  .caps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
-  .cap { padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
-  .cap h4 { font-size: 16px; letter-spacing: -0.012em; }
-  .cap ul { margin-top: 12px; display: grid; gap: 6px; color: var(--fg-2); font-size: 14.5px; }
+  .details dt { font-size: 14px; font-weight: 500; color: var(--muted); padding-top: 3px; }
+  .details dd { display: grid; gap: 2px; font-size: 16px; }
+  .caps__label { margin-top: clamp(72px, 8vw, 112px); margin-bottom: 28px; font-size: clamp(28px, 3vw, 40px); font-weight: 700; letter-spacing: -0.035em; color: var(--fg); }
+  .caps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+  .cap { padding: 26px; border-radius: var(--radius); background: var(--card); }
+  .cap h4 { font-size: 19px; font-weight: 700; letter-spacing: -0.02em; }
+  .cap ul { margin-top: 14px; display: grid; gap: 8px; color: var(--fg-2); font-size: 15px; }
   @media (max-width: 960px) {
     .about__intro { grid-template-columns: 1fr; }
     .caps { grid-template-columns: repeat(2, minmax(0, 1fr)); }

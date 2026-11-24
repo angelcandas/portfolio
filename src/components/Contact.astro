@@ -8,7 +8,7 @@ const out = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 5h
 ---
 <section id="contact" class="section contact" aria-labelledby="contact-title">
   <div class="wrap">
-    <div class="panel card">
+    <div class="panel card" data-reveal>
       <div>
         <p class="eyebrow">{t.contact.label}</p>
         <h2 id="contact-title" class="panel__title">{t.contact.title}</h2>
@@ -36,18 +36,17 @@ const out = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11l6-6M6 5h
 
 <style>
   .contact { padding-bottom: 0; }
-  .panel { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 32px; align-items: end; padding: clamp(28px, 4vw, 56px); background: radial-gradient(80% 120% at 100% 100%, var(--accent-soft), transparent 70%), var(--surface); }
-  .panel__title { margin-top: 12px; font-size: clamp(28px, 3.2vw, 42px); letter-spacing: -0.032em; max-width: 20ch; }
-  .panel__body { margin-top: 12px; color: var(--fg-2); font-size: 17px; }
-  .panel__actions { display: grid; gap: 10px; }
-  .panel__row { display: flex; gap: 10px; flex-wrap: wrap; }
-  .panel__row .btn { flex: 1; }
-  .panel__mail { min-height: 52px; font-size: 16px; }
-  .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; align-items: center; margin-top: clamp(64px, 8vw, 112px); padding-block: 20px; border-top: 1px solid var(--line); font-size: 13.5px; color: var(--muted); }
-  .foot time { color: var(--fg); font-variant-numeric: tabular-nums; font-family: var(--f-mono); font-size: 13px; }
+  .panel { display: grid; justify-items: center; text-align: center; gap: 36px; padding: clamp(40px, 7vw, 96px) clamp(24px, 5vw, 64px); background: radial-gradient(70% 90% at 50% 0%, var(--accent-soft), transparent 70%), var(--card); }
+  .panel__title { margin: 12px auto 0; font-size: clamp(36px, 5.4vw, 64px); font-weight: 700; letter-spacing: -0.04em; line-height: 1.05; max-width: 16ch; }
+  .panel__body { margin: 18px auto 0; color: var(--muted); font-size: clamp(19px, 1.7vw, 23px); font-weight: 500; letter-spacing: -0.015em; max-width: 36em; }
+  .panel__actions { display: grid; justify-items: center; gap: 14px; }
+  .panel__row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .panel__mail { min-height: 52px; padding-inline: 30px; font-size: 18px; }
+  .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; align-items: center; margin-top: clamp(88px, 10vw, 140px); padding-block: 20px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--muted); }
+  .foot time { color: var(--fg); font-variant-numeric: tabular-nums; font-size: 13px; }
   .totop { min-height: 44px; display: inline-flex; align-items: center; }
   .totop:hover { color: var(--fg); }
   @media (max-width: 860px) {
-    .panel { grid-template-columns: 1fr; align-items: start; }
+    .panel__mail { white-space: normal; }
   }
 </style>
